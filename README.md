@@ -1,12 +1,12 @@
-<div style="max-width: 100%; overflow-x: auto;">
-  <div style="text-align: center; padding: 0 10px;">
-    <h1 style="font-size: clamp(24px, 5vw, 36px);">Surfgram Docs</h1>
+<div align="center" style="width: 100%; overflow-x: auto;">
+  <div style="text-align: center; padding: 0 10px; width: 100%;">
+    <h1 style="font-size: clamp(24px, 5vw, 36px); margin: 0 auto;">Surfgram Docs</h1>
   </div>
 
-  <div style="display: flex; justify-content: center; margin: 20px 0;">
-    <img src="./assets/surfgram_docs_logo.svg" alt="Surfgram Logo" style="max-width: 100%; height: auto;">
+  <div style="display: flex; justify-content: center; margin: 20px auto; width: 100%;">
+    <img src="./assets/surfgram_docs_logo.svg" alt="Surfgram Logo" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
   </div>
-
+</div>
 
 # Exceptions
 - [Bot Exception](exceptions/bot_exception.md)
