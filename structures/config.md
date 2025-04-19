@@ -1,0 +1,41 @@
+# BaseConfig
+
+An abstract class to configure your Telegram bot
+
+## Usage
+
+To create a bot configuration, you need to:
+
+1. Create a class inheriting from `BaseConfig`
+2. Set the required `__bot_token__` property
+3. Define the required `__listener__` property
+
+### Example Implementation
+
+```python
+from surfgram.configs import BaseConfig
+from typing import Any
+from surfgram.listeners import BaseListener
+
+
+class BotConfig(BaseConfig):
+    """Main configuration for your Telegram bot"""
+    
+    __bot_token__: str = "YOUR_BOT_TOKEN"
+    __listener__: BaseListener = MyListener()  # Changed type hint to BaseListener
+```
+
+## Required Properties
+### `__bot_token__`
+- **Type**: `str`
+- **Description**: Your bot's authentication token obtained from [BotFather](https://t.me/BotFather) on Telegram
+
+### `__listener__`
+- **Type**: `BaseListener` (from surfgram.listeners)
+- **Description**: The listener instance that will handle incoming updates (must inherit from BaseListener)
+
+## Configuration Rules
+
+1. Your configuration class **must** inherit from `BaseConfig`
+2. Both `__bot_token__` and `__listener__` **must** be defined as class attributes
+3. The `__listener__` must be an instance of a class that inherits from `BaseListener`

@@ -1,0 +1,26 @@
+# BotDescriptionsFactory
+
+Factory for creating and managing BotDescription handlers.
+
+## Usage
+
+The factory automatically registers all active BotDescription handlers. 
+You typically don't need to interact with it directly.
+
+## Registration Flow
+
+1. When a BotDescription handler class is defined:
+   - The metaclass checks if `__is_active__` is True
+   - If active, registers the handler with the factory
+   - Registration uses the names returned by `__names__`
+
+## Methods
+
+### `register_bot_description`
+- **Signature**: `@classmethod def register_bot_description(cls, bot_description_cls: Type["BotDescription"]) -> None`
+- **Description**: Registers a new BotDescription handler class
+
+### `create`
+- **Signature**: `@classmethod async def create(cls, update) -> Optional["BotDescription"]`
+- **Description**: Instantiates the appropriate handler based on update content
+- **Returns**: Handler instance or None if no match found
