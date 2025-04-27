@@ -29,7 +29,6 @@ Create a new bot directory with template.
 
 | Option        | Description                                                                                          |
 |---------------|------------------------------------------------------------------------------------------------------|
-| --types TEXT | Template types to include: 'all', 'base', or specific types separated by commas (e.g., callback_queries,commands,configs,keyboards) [default: all] |
 | --full-trace | Show full error traceback                                                                          |
 
 #### Flow
