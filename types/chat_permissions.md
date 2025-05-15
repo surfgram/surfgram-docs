@@ -1,82 +1,66 @@
-# ChatPermissions Handler
+# ChatPermissions
 
 Telegram Bot API ChatPermissions type
 
-## Usage
+## Overview
 
-To create a ChatPermissions handler, you need to:
+| Property        | Type               | Required | Default | Description                              |
+|-----------------|--------------------|----------|---------|------------------------------------------|
+| `__is_active__` | `bool`             | No       | `True`  | Global handler switch                   |
+| `__names__`     | `List[str]`        | No       | `[]`    | Trigger filter (empty = all)            |
+| `__callback__`  | `Callable`         | **Yes**  | -       | Async handler function                  |
 
-1. Create a class inheriting from `ChatPermissions`
-2. Implement the required properties
-3. Define your callback function
+## Implementation Guide
 
-### Example Implementation
+### Basic Template
 
 ```python
+from typing import List, Callable
 from surfgram.types import ChatPermissions
-from typing import Callable
 
-
-class ExampleChatPermissions(ChatPermissions):
-    """Custom handler for ChatPermissions events"""
+class MyChatPermissionsHandler(ChatPermissions):
+    """"""
     
+    @property
+    def __is_active__(self) -> bool:
+        return True  # Set False to disable
+        
     @property
     def __names__(self) -> List[str]:
-        """List of trigger names for this handler"""
-        return ["example_chat_permissions"]
-    
+        return []  # ['specific_trigger'] for filtered handling
+        
     @property
     def __callback__(self) -> Callable:
-        """Returns the handler function"""
-        return self.handle
-    
-    async def handle(self, update, bot):
-        """Processes the ChatPermissions event"""
-        # Your implementation here
-        pass
+        return self.process_event
+        
+    async def process_event(self, update: dict, bot) -> None:
+        """Main handler logic"""
+        # Implement your processing here
 ```
 
-## Required Properties
+### Field Reference
 
-### `__names__`
-- **Type**: `List[str]`
-- **Description**: List of trigger names that will activate this handler
-- **Example**: `return ["start", "begin"]`
+The update object contains these fields:
 
-### `__callback__`
-- **Type**: `Callable`
-- **Description**: Returns the async function that will process the event
-- **Signature**: `async def callback(update, bot) -> None`
+| Field          | Type              | Description                     |
+|----------------|-------------------|---------------------------------|
+| `can_send_messages` | `bool` | Optional. True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues |
+| `can_send_audios` | `bool` | Optional. True, if the user is allowed to send audios |
+| `can_send_documents` | `bool` | Optional. True, if the user is allowed to send documents |
+| `can_send_photos` | `bool` | Optional. True, if the user is allowed to send photos |
+| `can_send_videos` | `bool` | Optional. True, if the user is allowed to send videos |
+| `can_send_video_notes` | `bool` | Optional. True, if the user is allowed to send video notes |
+| `can_send_voice_notes` | `bool` | Optional. True, if the user is allowed to send voice notes |
+| `can_send_polls` | `bool` | Optional. True, if the user is allowed to send polls |
+| `can_send_other_messages` | `bool` | Optional. True, if the user is allowed to send animations, games, stickers and use inline bots |
+| `can_add_web_page_previews` | `bool` | Optional. True, if the user is allowed to add web page previews to their messages |
+| `can_change_info` | `bool` | Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups |
+| `can_invite_users` | `bool` | Optional. True, if the user is allowed to invite new users to the chat |
+| `can_pin_messages` | `bool` | Optional. True, if the user is allowed to pin messages. Ignored in public supergroups |
+| `can_manage_topics` | `bool` | Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages |
 
-## Handler Method
+## Best Practices
 
-Your handler method should have the following signature:
-
-```python
-async def handle(self, update, bot):
-    """Processes the ChatPermissions event
-    
-    Args:
-        update: The incoming update object
-        bot: The bot instance for API calls
-    """
-```
-
-## Available Fields
-
-The update object will contain these fields (if applicable):
-
-- `can_send_messages` (bool): Optional. True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues
-- `can_send_audios` (bool): Optional. True, if the user is allowed to send audios
-- `can_send_documents` (bool): Optional. True, if the user is allowed to send documents
-- `can_send_photos` (bool): Optional. True, if the user is allowed to send photos
-- `can_send_videos` (bool): Optional. True, if the user is allowed to send videos
-- `can_send_video_notes` (bool): Optional. True, if the user is allowed to send video notes
-- `can_send_voice_notes` (bool): Optional. True, if the user is allowed to send voice notes
-- `can_send_polls` (bool): Optional. True, if the user is allowed to send polls
-- `can_send_other_messages` (bool): Optional. True, if the user is allowed to send animations, games, stickers and use inline bots
-- `can_add_web_page_previews` (bool): Optional. True, if the user is allowed to add web page previews to their messages
-- `can_change_info` (bool): Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups
-- `can_invite_users` (bool): Optional. True, if the user is allowed to invite new users to the chat
-- `can_pin_messages` (bool): Optional. True, if the user is allowed to pin messages. Ignored in public supergroups
-- `can_manage_topics` (bool): Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages
+1. **Naming**: 
+   - Use descriptive class names (`PaymentHandler` vs `Handler1`)
+   - Prefix related handlers (`AdminCommands`, `UserCommands`)

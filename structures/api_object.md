@@ -1,86 +1,77 @@
 # APIObject
 
-Telegram Bot API Response Wrapper
-
-## Usage
-
-`APIObject` provides a convenient way to work with Telegram Bot API responses by wrapping JSON data in a dynamic object structure.
-
-### Basic Implementation
-
+## Package
 ```python
 from surfgram import APIObject
-
-# Sample API response
-response = {
-    "id": 12345,
-    "first_name": "John",
-    "last_name": "Doe",
-    "settings": {"notifications": True}
-}
-
-# Create APIObject wrapper
-user = APIObject(response)
-
-# Access fields as attributes
-print(user.id)  # 12345
-print(user.first_name)  # "John"
-print(user.settings.notifications)  # True
 ```
 
-## Core Features
+## Class Description
+The `APIObject` class provides dynamic attribute access to Telegram Bot API responses, converting JSON structures into Python objects with intelligent error handling.
+
+> **Framework Implementation Detail**  
+> While users interact with APIObject instances through handler callbacks, they should typically use standard attribute access rather than direct class interaction.
+
+## Constructor
+```python
+__init__(data: Dict[str, Any]) -> None
+```
+
+### Parameters
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `data` | Dict[str, Any] | Raw API response dictionary |
+
+## Core Functionality
 
 ### Dynamic Attribute Access
-- Direct access to JSON fields as object attributes
-- Nested dictionaries automatically become `APIObject` instances
-- Intelligent attribute suggestions for mistyped names
-
-### Error Handling
-- Raises `AttributeError` with suggestions when attributes don't exist
-- Example: `user.nme` → suggests `Did you mean 'name'?` if available
-
-## Methods
-
-### `__init__(data: Dict[str, Any])`
-Initializes the wrapper with API response data.
-
-**Parameters:**
-- `data`: Raw API response dictionary (typically from Telegram Bot API)
-
-### `__getattr__(item: str) -> Any`
-Provides dynamic attribute access to the response data.
-
-**Behavior:**
-- Returns value for existing keys
-- Automatically wraps nested dictionaries in new `APIObject` instances
-- Provides helpful suggestions for mistyped attribute names
-
-### `__repr__() -> str`
-Returns a clean string representation showing the wrapped data.
-
-## Production Usage Example
-
-Here's how to use `APIObject` in a command handler:
-
 ```python
-from surfgram.types import Command
+__getattr__(item: str) -> Any
+```
+
+#### Behavior
+1. Attempts to retrieve the requested attribute from API response data
+2. Automatically wraps nested dictionaries as `APIObject` instances
+3. Provides fuzzy-matched suggestions for invalid attributes
+
+#### Response Handling
+| Input Type | Return Type |
+|------------|-------------|
+| Primitive (str, int, etc.) | Direct value |
+| Dictionary | New `APIObject` instance |
+| List | Raw list (no conversion) |
+
+#### Error Handling
+Raises `AttributeError` with suggestions when:
+- Attribute doesn't exist in response data
+- Attribute exists but value is `None` (Telegram API convention)
+
+### String Representation
+```python
+__repr__() -> str
+```
+Returns evaluable string representation including class name and source data.
+
+## Usage in Framework
+
+### Handler Implementation Example
+```python
+from surfgram.types import BotCommand
 from typing import Callable
 
-class SomeHandler(Command):
+class CmdHandler(BotCommand):
     @property
     def __names__(self):
-        return ["something"]
-
+        return ["start", "help"]
+    
     @property
     def __callback__(self) -> Callable:
         return self.handle
-
-    async def handle(self, update, bot): # update is APIObject
-        # Access update attributes through APIObject
-        chat_id = update.message.chat.id
+    
+    async def handle(self, update: APIObject, bot):
+        chat = update.message.chat
         
         await bot.send_message(
-            chat_id=chat_id,
-            text="Some text"
+            chat_id=chat.id,
+            text=f"Hello {user.first_name}!"
         )
 ```

@@ -1,64 +1,100 @@
 # BaseListener
 
-Base implementation for handling Telegram bot updates with built-in polling
-
-## Core Features
-- Automatic update polling with configurable offset/timeout
-- Update processing pipeline
-- Integration with bot's type system
-- Debug logging support
-
-## Initialization
-
+## Package
 ```python
-BaseListener(offset: int = 0, timeout: int = 30)
+from surfgram.core.listeners import BaseListener
 ```
 
-**Parameters:**
-- `offset`: Starting update ID (default: 0)
-- `timeout`: Long polling timeout in seconds (default: 30)
+## Class Description
+The `BaseListener` implements the core polling mechanism for Telegram bot updates, providing:
+- Continuous update fetching
+- Automatic offset management
+- Type-based handler dispatching
 
-## Main Methods
+## Constructor
+```python
+__init__(offset: int = 0, timeout: int = 30) -> None
+```
 
-### `listen(bot: Bot) -> None`
-Starts continuous update polling loop:
-1. Fetches updates using `_get_updates`
-2. Converts each to `APIObject`
-3. Processes via `on_update`
-4. Automatically manages update offset
+### Parameters
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `offset`  | int  | 0       | Initial update ID to resume from |
+| `timeout` | int  | 30      | Long-polling timeout in seconds |
 
-### `on_update(update: APIObject, bot: Bot) -> None`
-Default update handling flow:
-1. Logs the raw update
-2. Gets appropriate handler via `TypesFactory`
+## Public Methods
+
+### Event Loop
+```python
+async listen(bot: Bot) -> None
+```
+
+#### Description
+Main event loop that continuously:
+1. Fetches updates via `get_updates`
+2. Processes each through `on_update`
+3. Manages update offsets automatically
+
+#### Flow
+```mermaid
+graph TD
+    A[Start] --> B[Fetch Updates]
+    B --> C{Updates?}
+    C -->|Yes| D[Process Each]
+    C -->|No| B
+    D --> E[Update Offset]
+    E --> B
+```
+
+### Update Handler
+```python
+async on_update(update: APIObject, bot: Bot) -> None
+```
+
+#### Processing Pipeline
+1. Logs raw update at `API` debug level
+2. Resolves appropriate handler via `TypesFactory`
 3. Creates executable instance
-4. Executes the callback
+4. Invokes registered callback
 
-### `_get_updates(bot: Bot) -> List[Dict[str, Any]]`
-Internal method for fetching updates:
-- Uses bot's `get_updates` API
-- Returns raw update dictionaries
-- Handles error cases (returns empty list on failure)
+#### Type Resolution
+Uses `TypesFactory` to map update types to handlers:
+- Message → `MessageExecutable`
+- CallbackQuery → `CallbackExecutable`
+- etc.
 
-## Usage Example
+## Internal Method
 
+### Update Fetcher
+```python
+async _get_updates(bot: Bot) -> List[Dict[str, Any]]
+```
+
+#### Behavior
+- Wrapper for `bot.get_updates` API call
+- Returns empty list on no updates
+- Handles response parsing (extracts `result` field)
+
+## Configuration Guidance
+
+### Standard Usage
+```python
+# In your config.py
+from surfgram.core.listeners import BaseListener
+
+class MyConfig(BaseConfig):
+    # ....
+    __listener__ = BaseListener
+```
+
+### Custom Listeners
+Subclass to modify behavior:
 ```python
 class CustomListener(BaseListener):
-    async def on_update(self, update: APIObject, bot: Bot) -> None:
-        # Custom pre-processing
-        debugger.log(f"Custom handling: {update}")
-        
-        # Call parent implementation
+    async def on_update(self, update, bot):
+        # Pre-processing logic here
         await super().on_update(update, bot)
-        
-        # Custom post-processing
-        await bot.send_message(...)
 ```
 
-## Implementation Notes
-- Inherits from abstract `Listener` class
-- Handles all core update processing logic
-- Designed for extension (override methods as needed)
-- Integrates with framework's type system automatically
+> **See Also**: [Configuration Documentation](https://github.com/surfgram/surfgram-docs/blob/main/structures/config.md) for proper listener setup.
 
-> Note: This is the recommended base class for most listener implementations. Override specific methods to customize behavior while maintaining core functionality.

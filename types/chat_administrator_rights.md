@@ -1,83 +1,67 @@
-# ChatAdministratorRights Handler
+# ChatAdministratorRights
 
 Telegram Bot API ChatAdministratorRights type
 
-## Usage
+## Overview
 
-To create a ChatAdministratorRights handler, you need to:
+| Property        | Type               | Required | Default | Description                              |
+|-----------------|--------------------|----------|---------|------------------------------------------|
+| `__is_active__` | `bool`             | No       | `True`  | Global handler switch                   |
+| `__names__`     | `List[str]`        | No       | `[]`    | Trigger filter (empty = all)            |
+| `__callback__`  | `Callable`         | **Yes**  | -       | Async handler function                  |
 
-1. Create a class inheriting from `ChatAdministratorRights`
-2. Implement the required properties
-3. Define your callback function
+## Implementation Guide
 
-### Example Implementation
+### Basic Template
 
 ```python
+from typing import List, Callable
 from surfgram.types import ChatAdministratorRights
-from typing import Callable
 
-
-class ExampleChatAdministratorRights(ChatAdministratorRights):
-    """Custom handler for ChatAdministratorRights events"""
+class MyChatAdministratorRightsHandler(ChatAdministratorRights):
+    """"""
     
+    @property
+    def __is_active__(self) -> bool:
+        return True  # Set False to disable
+        
     @property
     def __names__(self) -> List[str]:
-        """List of trigger names for this handler"""
-        return ["example_chat_administrator_rights"]
-    
+        return []  # ['specific_trigger'] for filtered handling
+        
     @property
     def __callback__(self) -> Callable:
-        """Returns the handler function"""
-        return self.handle
-    
-    async def handle(self, update, bot):
-        """Processes the ChatAdministratorRights event"""
-        # Your implementation here
-        pass
+        return self.process_event
+        
+    async def process_event(self, update: dict, bot) -> None:
+        """Main handler logic"""
+        # Implement your processing here
 ```
 
-## Required Properties
+### Field Reference
 
-### `__names__`
-- **Type**: `List[str]`
-- **Description**: List of trigger names that will activate this handler
-- **Example**: `return ["start", "begin"]`
+The update object contains these fields:
 
-### `__callback__`
-- **Type**: `Callable`
-- **Description**: Returns the async function that will process the event
-- **Signature**: `async def callback(update, bot) -> None`
+| Field          | Type              | Description                     |
+|----------------|-------------------|---------------------------------|
+| `is_anonymous` | `bool` | True, if the user's presence in the chat is hidden |
+| `can_manage_chat` | `bool` | True, if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages and ignore slow mode. Implied by any other administrator privilege. |
+| `can_delete_messages` | `bool` | True, if the administrator can delete messages of other users |
+| `can_manage_video_chats` | `bool` | True, if the administrator can manage video chats |
+| `can_restrict_members` | `bool` | True, if the administrator can restrict, ban or unban chat members, or access supergroup statistics |
+| `can_promote_members` | `bool` | True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly (promoted by administrators that were appointed by the user) |
+| `can_change_info` | `bool` | True, if the user is allowed to change the chat title, photo and other settings |
+| `can_invite_users` | `bool` | True, if the user is allowed to invite new users to the chat |
+| `can_post_stories` | `bool` | True, if the administrator can post stories to the chat |
+| `can_edit_stories` | `bool` | True, if the administrator can edit stories posted by other users, post stories to the chat page, pin chat stories, and access the chat's story archive |
+| `can_delete_stories` | `bool` | True, if the administrator can delete stories posted by other users |
+| `can_post_messages` | `bool` | Optional. True, if the administrator can post messages in the channel, or access channel statistics; for channels only |
+| `can_edit_messages` | `bool` | Optional. True, if the administrator can edit messages of other users and can pin messages; for channels only |
+| `can_pin_messages` | `bool` | Optional. True, if the user is allowed to pin messages; for groups and supergroups only |
+| `can_manage_topics` | `bool` | Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only |
 
-## Handler Method
+## Best Practices
 
-Your handler method should have the following signature:
-
-```python
-async def handle(self, update, bot):
-    """Processes the ChatAdministratorRights event
-    
-    Args:
-        update: The incoming update object
-        bot: The bot instance for API calls
-    """
-```
-
-## Available Fields
-
-The update object will contain these fields (if applicable):
-
-- `is_anonymous` (bool): True, if the user's presence in the chat is hidden
-- `can_manage_chat` (bool): True, if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages and ignore slow mode. Implied by any other administrator privilege.
-- `can_delete_messages` (bool): True, if the administrator can delete messages of other users
-- `can_manage_video_chats` (bool): True, if the administrator can manage video chats
-- `can_restrict_members` (bool): True, if the administrator can restrict, ban or unban chat members, or access supergroup statistics
-- `can_promote_members` (bool): True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly (promoted by administrators that were appointed by the user)
-- `can_change_info` (bool): True, if the user is allowed to change the chat title, photo and other settings
-- `can_invite_users` (bool): True, if the user is allowed to invite new users to the chat
-- `can_post_stories` (bool): True, if the administrator can post stories to the chat
-- `can_edit_stories` (bool): True, if the administrator can edit stories posted by other users, post stories to the chat page, pin chat stories, and access the chat's story archive
-- `can_delete_stories` (bool): True, if the administrator can delete stories posted by other users
-- `can_post_messages` (bool): Optional. True, if the administrator can post messages in the channel, or access channel statistics; for channels only
-- `can_edit_messages` (bool): Optional. True, if the administrator can edit messages of other users and can pin messages; for channels only
-- `can_pin_messages` (bool): Optional. True, if the user is allowed to pin messages; for groups and supergroups only
-- `can_manage_topics` (bool): Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only
+1. **Naming**: 
+   - Use descriptive class names (`PaymentHandler` vs `Handler1`)
+   - Prefix related handlers (`AdminCommands`, `UserCommands`)

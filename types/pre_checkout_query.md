@@ -1,75 +1,59 @@
-# PreCheckoutQuery Handler
+# PreCheckoutQuery
 
 Telegram Bot API PreCheckoutQuery type
 
-## Usage
+## Overview
 
-To create a PreCheckoutQuery handler, you need to:
+| Property        | Type               | Required | Default | Description                              |
+|-----------------|--------------------|----------|---------|------------------------------------------|
+| `__is_active__` | `bool`             | No       | `True`  | Global handler switch                   |
+| `__names__`     | `List[str]`        | No       | `[]`    | Trigger filter (empty = all)            |
+| `__callback__`  | `Callable`         | **Yes**  | -       | Async handler function                  |
 
-1. Create a class inheriting from `PreCheckoutQuery`
-2. Implement the required properties
-3. Define your callback function
+## Implementation Guide
 
-### Example Implementation
+### Basic Template
 
 ```python
+from typing import List, Callable
 from surfgram.types import PreCheckoutQuery
-from typing import Callable
 
-
-class ExamplePreCheckoutQuery(PreCheckoutQuery):
-    """Custom handler for PreCheckoutQuery events"""
+class MyPreCheckoutQueryHandler(PreCheckoutQuery):
+    """"""
     
+    @property
+    def __is_active__(self) -> bool:
+        return True  # Set False to disable
+        
     @property
     def __names__(self) -> List[str]:
-        """List of trigger names for this handler"""
-        return ["example_pre_checkout_query"]
-    
+        return []  # ['specific_trigger'] for filtered handling
+        
     @property
     def __callback__(self) -> Callable:
-        """Returns the handler function"""
-        return self.handle
-    
-    async def handle(self, update, bot):
-        """Processes the PreCheckoutQuery event"""
-        # Your implementation here
-        pass
+        return self.process_event
+        
+    async def process_event(self, update: dict, bot) -> None:
+        """Main handler logic"""
+        # Implement your processing here
 ```
 
-## Required Properties
+### Field Reference
 
-### `__names__`
-- **Type**: `List[str]`
-- **Description**: List of trigger names that will activate this handler
-- **Example**: `return ["start", "begin"]`
+The update object contains these fields:
 
-### `__callback__`
-- **Type**: `Callable`
-- **Description**: Returns the async function that will process the event
-- **Signature**: `async def callback(update, bot) -> None`
+| Field          | Type              | Description                     |
+|----------------|-------------------|---------------------------------|
+| `id` | `str` | Unique query identifier |
+| `from` | `User` | User who sent the query |
+| `currency` | `str` | Three-letter ISO 4217 currency code, or "XTR" for payments in Telegram Stars |
+| `total_amount` | `int` | Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). |
+| `invoice_payload` | `str` | Bot-specified invoice payload |
+| `shipping_option_id` | `str` | Optional. Identifier of the shipping option chosen by the user |
+| `order_info` | `OrderInfo` | Optional. Order information provided by the user |
 
-## Handler Method
+## Best Practices
 
-Your handler method should have the following signature:
-
-```python
-async def handle(self, update, bot):
-    """Processes the PreCheckoutQuery event
-    
-    Args:
-        update: The incoming update object
-        bot: The bot instance for API calls
-    """
-```
-
-## Available Fields
-
-The update object will contain these fields (if applicable):
-
-- `id` (str): Unique query identifier
-- `from` (User): User who sent the query
-- `currency` (str): Three-letter ISO 4217 currency code, or "XTR" for payments in Telegram Stars
-- `total_amount` (int): Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
-- `invoice_payload` (str): Bot-specified invoice payload
-- `shipping_option_id` (str): Optional. Identifier of the shipping option chosen by the user
-- `order_info` (OrderInfo): Optional. Order information provided by the user
+1. **Naming**: 
+   - Use descriptive class names (`PaymentHandler` vs `Handler1`)
+   - Prefix related handlers (`AdminCommands`, `UserCommands`)

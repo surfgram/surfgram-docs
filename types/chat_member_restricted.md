@@ -1,86 +1,70 @@
-# ChatMemberRestricted Handler
+# ChatMemberRestricted
 
 Telegram Bot API ChatMemberRestricted type
 
-## Usage
+## Overview
 
-To create a ChatMemberRestricted handler, you need to:
+| Property        | Type               | Required | Default | Description                              |
+|-----------------|--------------------|----------|---------|------------------------------------------|
+| `__is_active__` | `bool`             | No       | `True`  | Global handler switch                   |
+| `__names__`     | `List[str]`        | No       | `[]`    | Trigger filter (empty = all)            |
+| `__callback__`  | `Callable`         | **Yes**  | -       | Async handler function                  |
 
-1. Create a class inheriting from `ChatMemberRestricted`
-2. Implement the required properties
-3. Define your callback function
+## Implementation Guide
 
-### Example Implementation
+### Basic Template
 
 ```python
+from typing import List, Callable
 from surfgram.types import ChatMemberRestricted
-from typing import Callable
 
-
-class ExampleChatMemberRestricted(ChatMemberRestricted):
-    """Custom handler for ChatMemberRestricted events"""
+class MyChatMemberRestrictedHandler(ChatMemberRestricted):
+    """"""
     
+    @property
+    def __is_active__(self) -> bool:
+        return True  # Set False to disable
+        
     @property
     def __names__(self) -> List[str]:
-        """List of trigger names for this handler"""
-        return ["example_chat_member_restricted"]
-    
+        return []  # ['specific_trigger'] for filtered handling
+        
     @property
     def __callback__(self) -> Callable:
-        """Returns the handler function"""
-        return self.handle
-    
-    async def handle(self, update, bot):
-        """Processes the ChatMemberRestricted event"""
-        # Your implementation here
-        pass
+        return self.process_event
+        
+    async def process_event(self, update: dict, bot) -> None:
+        """Main handler logic"""
+        # Implement your processing here
 ```
 
-## Required Properties
+### Field Reference
 
-### `__names__`
-- **Type**: `List[str]`
-- **Description**: List of trigger names that will activate this handler
-- **Example**: `return ["start", "begin"]`
+The update object contains these fields:
 
-### `__callback__`
-- **Type**: `Callable`
-- **Description**: Returns the async function that will process the event
-- **Signature**: `async def callback(update, bot) -> None`
+| Field          | Type              | Description                     |
+|----------------|-------------------|---------------------------------|
+| `status` | `str` | The member's status in the chat, always "restricted" |
+| `user` | `User` | Information about the user |
+| `is_member` | `bool` | True, if the user is a member of the chat at the moment of the request |
+| `can_send_messages` | `bool` | True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues |
+| `can_send_audios` | `bool` | True, if the user is allowed to send audios |
+| `can_send_documents` | `bool` | True, if the user is allowed to send documents |
+| `can_send_photos` | `bool` | True, if the user is allowed to send photos |
+| `can_send_videos` | `bool` | True, if the user is allowed to send videos |
+| `can_send_video_notes` | `bool` | True, if the user is allowed to send video notes |
+| `can_send_voice_notes` | `bool` | True, if the user is allowed to send voice notes |
+| `can_send_polls` | `bool` | True, if the user is allowed to send polls |
+| `can_send_other_messages` | `bool` | True, if the user is allowed to send animations, games, stickers and use inline bots |
+| `can_add_web_page_previews` | `bool` | True, if the user is allowed to add web page previews to their messages |
+| `can_change_info` | `bool` | True, if the user is allowed to change the chat title, photo and other settings |
+| `can_invite_users` | `bool` | True, if the user is allowed to invite new users to the chat |
+| `can_pin_messages` | `bool` | True, if the user is allowed to pin messages |
+| `can_manage_topics` | `bool` | True, if the user is allowed to create forum topics |
+| `until_date` | `int` | Date when restrictions will be lifted for this user; Unix time. If 0, then the user is restricted forever |
 
-## Handler Method
+## Best Practices
 
-Your handler method should have the following signature:
-
-```python
-async def handle(self, update, bot):
-    """Processes the ChatMemberRestricted event
-    
-    Args:
-        update: The incoming update object
-        bot: The bot instance for API calls
-    """
-```
-
-## Available Fields
-
-The update object will contain these fields (if applicable):
-
-- `status` (str): The member's status in the chat, always "restricted"
-- `user` (User): Information about the user
-- `is_member` (bool): True, if the user is a member of the chat at the moment of the request
-- `can_send_messages` (bool): True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues
-- `can_send_audios` (bool): True, if the user is allowed to send audios
-- `can_send_documents` (bool): True, if the user is allowed to send documents
-- `can_send_photos` (bool): True, if the user is allowed to send photos
-- `can_send_videos` (bool): True, if the user is allowed to send videos
-- `can_send_video_notes` (bool): True, if the user is allowed to send video notes
-- `can_send_voice_notes` (bool): True, if the user is allowed to send voice notes
-- `can_send_polls` (bool): True, if the user is allowed to send polls
-- `can_send_other_messages` (bool): True, if the user is allowed to send animations, games, stickers and use inline bots
-- `can_add_web_page_previews` (bool): True, if the user is allowed to add web page previews to their messages
-- `can_change_info` (bool): True, if the user is allowed to change the chat title, photo and other settings
-- `can_invite_users` (bool): True, if the user is allowed to invite new users to the chat
-- `can_pin_messages` (bool): True, if the user is allowed to pin messages
-- `can_manage_topics` (bool): True, if the user is allowed to create forum topics
-- `until_date` (int): Date when restrictions will be lifted for this user; Unix time. If 0, then the user is restricted forever
+1. **Naming**: 
+   - Use descriptive class names (`PaymentHandler` vs `Handler1`)
+   - Prefix related handlers (`AdminCommands`, `UserCommands`)

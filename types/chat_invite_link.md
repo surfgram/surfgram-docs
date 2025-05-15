@@ -1,79 +1,63 @@
-# ChatInviteLink Handler
+# ChatInviteLink
 
 Telegram Bot API ChatInviteLink type
 
-## Usage
+## Overview
 
-To create a ChatInviteLink handler, you need to:
+| Property        | Type               | Required | Default | Description                              |
+|-----------------|--------------------|----------|---------|------------------------------------------|
+| `__is_active__` | `bool`             | No       | `True`  | Global handler switch                   |
+| `__names__`     | `List[str]`        | No       | `[]`    | Trigger filter (empty = all)            |
+| `__callback__`  | `Callable`         | **Yes**  | -       | Async handler function                  |
 
-1. Create a class inheriting from `ChatInviteLink`
-2. Implement the required properties
-3. Define your callback function
+## Implementation Guide
 
-### Example Implementation
+### Basic Template
 
 ```python
+from typing import List, Callable
 from surfgram.types import ChatInviteLink
-from typing import Callable
 
-
-class ExampleChatInviteLink(ChatInviteLink):
-    """Custom handler for ChatInviteLink events"""
+class MyChatInviteLinkHandler(ChatInviteLink):
+    """"""
     
+    @property
+    def __is_active__(self) -> bool:
+        return True  # Set False to disable
+        
     @property
     def __names__(self) -> List[str]:
-        """List of trigger names for this handler"""
-        return ["example_chat_invite_link"]
-    
+        return []  # ['specific_trigger'] for filtered handling
+        
     @property
     def __callback__(self) -> Callable:
-        """Returns the handler function"""
-        return self.handle
-    
-    async def handle(self, update, bot):
-        """Processes the ChatInviteLink event"""
-        # Your implementation here
-        pass
+        return self.process_event
+        
+    async def process_event(self, update: dict, bot) -> None:
+        """Main handler logic"""
+        # Implement your processing here
 ```
 
-## Required Properties
+### Field Reference
 
-### `__names__`
-- **Type**: `List[str]`
-- **Description**: List of trigger names that will activate this handler
-- **Example**: `return ["start", "begin"]`
+The update object contains these fields:
 
-### `__callback__`
-- **Type**: `Callable`
-- **Description**: Returns the async function that will process the event
-- **Signature**: `async def callback(update, bot) -> None`
+| Field          | Type              | Description                     |
+|----------------|-------------------|---------------------------------|
+| `invite_link` | `str` | The invite link. If the link was created by another chat administrator, then the second part of the link will be replaced with "…". |
+| `creator` | `User` | Creator of the link |
+| `creates_join_request` | `bool` | True, if users joining the chat via the link need to be approved by chat administrators |
+| `is_primary` | `bool` | True, if the link is primary |
+| `is_revoked` | `bool` | True, if the link is revoked |
+| `name` | `str` | Optional. Invite link name |
+| `expire_date` | `int` | Optional. Point in time (Unix timestamp) when the link will expire or has been expired |
+| `member_limit` | `int` | Optional. The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999 |
+| `pending_join_request_count` | `int` | Optional. Number of pending join requests created using this link |
+| `subscription_period` | `int` | Optional. The number of seconds the subscription will be active for before the next payment |
+| `subscription_price` | `int` | Optional. The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat using the link |
 
-## Handler Method
+## Best Practices
 
-Your handler method should have the following signature:
-
-```python
-async def handle(self, update, bot):
-    """Processes the ChatInviteLink event
-    
-    Args:
-        update: The incoming update object
-        bot: The bot instance for API calls
-    """
-```
-
-## Available Fields
-
-The update object will contain these fields (if applicable):
-
-- `invite_link` (str): The invite link. If the link was created by another chat administrator, then the second part of the link will be replaced with "…".
-- `creator` (User): Creator of the link
-- `creates_join_request` (bool): True, if users joining the chat via the link need to be approved by chat administrators
-- `is_primary` (bool): True, if the link is primary
-- `is_revoked` (bool): True, if the link is revoked
-- `name` (str): Optional. Invite link name
-- `expire_date` (int): Optional. Point in time (Unix timestamp) when the link will expire or has been expired
-- `member_limit` (int): Optional. The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999
-- `pending_join_request_count` (int): Optional. Number of pending join requests created using this link
-- `subscription_period` (int): Optional. The number of seconds the subscription will be active for before the next payment
-- `subscription_price` (int): Optional. The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat using the link
+1. **Naming**: 
+   - Use descriptive class names (`PaymentHandler` vs `Handler1`)
+   - Prefix related handlers (`AdminCommands`, `UserCommands`)

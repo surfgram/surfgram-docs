@@ -1,79 +1,63 @@
-# Video Handler
+# Video
 
 Telegram Bot API Video type
 
-## Usage
+## Overview
 
-To create a Video handler, you need to:
+| Property        | Type               | Required | Default | Description                              |
+|-----------------|--------------------|----------|---------|------------------------------------------|
+| `__is_active__` | `bool`             | No       | `True`  | Global handler switch                   |
+| `__names__`     | `List[str]`        | No       | `[]`    | Trigger filter (empty = all)            |
+| `__callback__`  | `Callable`         | **Yes**  | -       | Async handler function                  |
 
-1. Create a class inheriting from `Video`
-2. Implement the required properties
-3. Define your callback function
+## Implementation Guide
 
-### Example Implementation
+### Basic Template
 
 ```python
+from typing import List, Callable
 from surfgram.types import Video
-from typing import Callable
 
-
-class ExampleVideo(Video):
-    """Custom handler for Video events"""
+class MyVideoHandler(Video):
+    """"""
     
+    @property
+    def __is_active__(self) -> bool:
+        return True  # Set False to disable
+        
     @property
     def __names__(self) -> List[str]:
-        """List of trigger names for this handler"""
-        return ["example_video"]
-    
+        return []  # ['specific_trigger'] for filtered handling
+        
     @property
     def __callback__(self) -> Callable:
-        """Returns the handler function"""
-        return self.handle
-    
-    async def handle(self, update, bot):
-        """Processes the Video event"""
-        # Your implementation here
-        pass
+        return self.process_event
+        
+    async def process_event(self, update: dict, bot) -> None:
+        """Main handler logic"""
+        # Implement your processing here
 ```
 
-## Required Properties
+### Field Reference
 
-### `__names__`
-- **Type**: `List[str]`
-- **Description**: List of trigger names that will activate this handler
-- **Example**: `return ["start", "begin"]`
+The update object contains these fields:
 
-### `__callback__`
-- **Type**: `Callable`
-- **Description**: Returns the async function that will process the event
-- **Signature**: `async def callback(update, bot) -> None`
+| Field          | Type              | Description                     |
+|----------------|-------------------|---------------------------------|
+| `file_id` | `str` | Identifier for this file, which can be used to download or reuse the file |
+| `file_unique_id` | `str` | Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file. |
+| `width` | `int` | Video width as defined by the sender |
+| `height` | `int` | Video height as defined by the sender |
+| `duration` | `int` | Duration of the video in seconds as defined by the sender |
+| `thumbnail` | `PhotoSize` | Optional. Video thumbnail |
+| `cover` | `List[PhotoSize]` | Optional. Available sizes of the cover of the video in the message |
+| `start_timestamp` | `int` | Optional. Timestamp in seconds from which the video will play in the message |
+| `file_name` | `str` | Optional. Original filename as defined by the sender |
+| `mime_type` | `str` | Optional. MIME type of the file as defined by the sender |
+| `file_size` | `int` | Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value. |
 
-## Handler Method
+## Best Practices
 
-Your handler method should have the following signature:
-
-```python
-async def handle(self, update, bot):
-    """Processes the Video event
-    
-    Args:
-        update: The incoming update object
-        bot: The bot instance for API calls
-    """
-```
-
-## Available Fields
-
-The update object will contain these fields (if applicable):
-
-- `file_id` (str): Identifier for this file, which can be used to download or reuse the file
-- `file_unique_id` (str): Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
-- `width` (int): Video width as defined by the sender
-- `height` (int): Video height as defined by the sender
-- `duration` (int): Duration of the video in seconds as defined by the sender
-- `thumbnail` (PhotoSize): Optional. Video thumbnail
-- `cover` (List[PhotoSize]): Optional. Available sizes of the cover of the video in the message
-- `start_timestamp` (int): Optional. Timestamp in seconds from which the video will play in the message
-- `file_name` (str): Optional. Original filename as defined by the sender
-- `mime_type` (str): Optional. MIME type of the file as defined by the sender
-- `file_size` (int): Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
+1. **Naming**: 
+   - Use descriptive class names (`PaymentHandler` vs `Handler1`)
+   - Prefix related handlers (`AdminCommands`, `UserCommands`)

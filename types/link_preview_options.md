@@ -1,73 +1,57 @@
-# LinkPreviewOptions Handler
+# LinkPreviewOptions
 
 Telegram Bot API LinkPreviewOptions type
 
-## Usage
+## Overview
 
-To create a LinkPreviewOptions handler, you need to:
+| Property        | Type               | Required | Default | Description                              |
+|-----------------|--------------------|----------|---------|------------------------------------------|
+| `__is_active__` | `bool`             | No       | `True`  | Global handler switch                   |
+| `__names__`     | `List[str]`        | No       | `[]`    | Trigger filter (empty = all)            |
+| `__callback__`  | `Callable`         | **Yes**  | -       | Async handler function                  |
 
-1. Create a class inheriting from `LinkPreviewOptions`
-2. Implement the required properties
-3. Define your callback function
+## Implementation Guide
 
-### Example Implementation
+### Basic Template
 
 ```python
+from typing import List, Callable
 from surfgram.types import LinkPreviewOptions
-from typing import Callable
 
-
-class ExampleLinkPreviewOptions(LinkPreviewOptions):
-    """Custom handler for LinkPreviewOptions events"""
+class MyLinkPreviewOptionsHandler(LinkPreviewOptions):
+    """"""
     
+    @property
+    def __is_active__(self) -> bool:
+        return True  # Set False to disable
+        
     @property
     def __names__(self) -> List[str]:
-        """List of trigger names for this handler"""
-        return ["example_link_preview_options"]
-    
+        return []  # ['specific_trigger'] for filtered handling
+        
     @property
     def __callback__(self) -> Callable:
-        """Returns the handler function"""
-        return self.handle
-    
-    async def handle(self, update, bot):
-        """Processes the LinkPreviewOptions event"""
-        # Your implementation here
-        pass
+        return self.process_event
+        
+    async def process_event(self, update: dict, bot) -> None:
+        """Main handler logic"""
+        # Implement your processing here
 ```
 
-## Required Properties
+### Field Reference
 
-### `__names__`
-- **Type**: `List[str]`
-- **Description**: List of trigger names that will activate this handler
-- **Example**: `return ["start", "begin"]`
+The update object contains these fields:
 
-### `__callback__`
-- **Type**: `Callable`
-- **Description**: Returns the async function that will process the event
-- **Signature**: `async def callback(update, bot) -> None`
+| Field          | Type              | Description                     |
+|----------------|-------------------|---------------------------------|
+| `is_disabled` | `bool` | Optional. True, if the link preview is disabled |
+| `url` | `str` | Optional. URL to use for the link preview. If empty, then the first URL found in the message text will be used |
+| `prefer_small_media` | `bool` | Optional. True, if the media in the link preview is supposed to be shrunk; ignored if the URL isn't explicitly specified or media size change isn't supported for the preview |
+| `prefer_large_media` | `bool` | Optional. True, if the media in the link preview is supposed to be enlarged; ignored if the URL isn't explicitly specified or media size change isn't supported for the preview |
+| `show_above_text` | `bool` | Optional. True, if the link preview must be shown above the message text; otherwise, the link preview will be shown below the message text |
 
-## Handler Method
+## Best Practices
 
-Your handler method should have the following signature:
-
-```python
-async def handle(self, update, bot):
-    """Processes the LinkPreviewOptions event
-    
-    Args:
-        update: The incoming update object
-        bot: The bot instance for API calls
-    """
-```
-
-## Available Fields
-
-The update object will contain these fields (if applicable):
-
-- `is_disabled` (bool): Optional. True, if the link preview is disabled
-- `url` (str): Optional. URL to use for the link preview. If empty, then the first URL found in the message text will be used
-- `prefer_small_media` (bool): Optional. True, if the media in the link preview is supposed to be shrunk; ignored if the URL isn't explicitly specified or media size change isn't supported for the preview
-- `prefer_large_media` (bool): Optional. True, if the media in the link preview is supposed to be enlarged; ignored if the URL isn't explicitly specified or media size change isn't supported for the preview
-- `show_above_text` (bool): Optional. True, if the link preview must be shown above the message text; otherwise, the link preview will be shown below the message text
+1. **Naming**: 
+   - Use descriptive class names (`PaymentHandler` vs `Handler1`)
+   - Prefix related handlers (`AdminCommands`, `UserCommands`)
