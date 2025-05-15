@@ -57,12 +57,6 @@ async on_update(update: APIObject, bot: Bot) -> None
 3. Creates executable instance
 4. Invokes registered callback
 
-#### Type Resolution
-Uses `TypesFactory` to map update types to handlers:
-- Message → `MessageExecutable`
-- CallbackQuery → `CallbackExecutable`
-- etc.
-
 ## Internal Method
 
 ### Update Fetcher
