@@ -1,72 +1,54 @@
-# UniqueGiftBackdropColors Handler
+# UniqueGiftBackdropColors
 
 Telegram Bot API UniqueGiftBackdropColors type
 
-## Usage
+## Overview
 
-To create a UniqueGiftBackdropColors handler, you need to:
+| Property        | Type               | Required | Default | Description                              |
+|-----------------|--------------------|----------|---------|------------------------------------------|
+| `__is_active__` | `bool`             | No       | `True`  | Global handler switch                   |
+| `__names__`     | `List[str]`        | No       | `[]`    | Trigger filter (empty = all)            |
+| `__callback__`  | `Callable`         | **Yes**  | -       | Async handler function                  |
 
-1. Create a class inheriting from `UniqueGiftBackdropColors`
-2. Implement the required properties
-3. Define your callback function
+## Implementation Guide
 
-### Example Implementation
+### Basic Template
 
 ```python
+from typing import List, Callable
 from surfgram.types import UniqueGiftBackdropColors
-from typing import Callable
 
-
-class ExampleUniqueGiftBackdropColors(UniqueGiftBackdropColors):
-    """Custom handler for UniqueGiftBackdropColors events"""
-    
+class MyUniqueGiftBackdropColorsHandler(UniqueGiftBackdropColors):    
+    @property
+    def __is_active__(self) -> bool:
+        return True  # Set False to disable
+        
     @property
     def __names__(self) -> List[str]:
-        """List of trigger names for this handler"""
-        return ["example_unique_gift_backdrop_colors"]
-    
+        return []  # ['specific_trigger'] for filtered handling
+        
     @property
     def __callback__(self) -> Callable:
-        """Returns the handler function"""
-        return self.handle
-    
-    async def handle(self, update, bot):
-        """Processes the UniqueGiftBackdropColors event"""
-        # Your implementation here
-        pass
+        return self.process_event
+        
+    async def process_event(self, update: dict, bot) -> None:
+        """Main handler logic"""
+        # Implement your processing here
 ```
 
-## Required Properties
+### Field Reference
 
-### `__names__`
-- **Type**: `List[str]`
-- **Description**: List of trigger names that will activate this handler
-- **Example**: `return ["start", "begin"]`
+The update object contains these fields:
 
-### `__callback__`
-- **Type**: `Callable`
-- **Description**: Returns the async function that will process the event
-- **Signature**: `async def callback(update, bot) -> None`
+| Field          | Type              | Description                     |
+|----------------|-------------------|---------------------------------|
+| `center_color` | `int` | The color in the center of the backdrop in RGB format |
+| `edge_color` | `int` | The color on the edges of the backdrop in RGB format |
+| `symbol_color` | `int` | The color to be applied to the symbol in RGB format |
+| `text_color` | `int` | The color for the text on the backdrop in RGB format |
 
-## Handler Method
+## Best Practices
 
-Your handler method should have the following signature:
-
-```python
-async def handle(self, update, bot):
-    """Processes the UniqueGiftBackdropColors event
-    
-    Args:
-        update: The incoming update object
-        bot: The bot instance for API calls
-    """
-```
-
-## Available Fields
-
-The update object will contain these fields (if applicable):
-
-- `center_color` (int): The color in the center of the backdrop in RGB format
-- `edge_color` (int): The color on the edges of the backdrop in RGB format
-- `symbol_color` (int): The color to be applied to the symbol in RGB format
-- `text_color` (int): The color for the text on the backdrop in RGB format
+1. **Naming**: 
+   - Use descriptive class names (`PaymentHandler` vs `Handler1`)
+   - Prefix related handlers (`AdminCommands`, `UserCommands`)

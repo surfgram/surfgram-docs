@@ -8,18 +8,22 @@
   </div>
 </div>
 
-# Exceptions
-- [Bot Exception](exceptions/bot_exception.md)
-- [Token Exception](exceptions/token_exception.md)
+## Bot
+- [Bot](bot/bot.md)
 
-# Structures
-- [Config](structures/config.md)
-- [Api Object](structures/api_object.md)
-
-# Listeners
+## Listeners
 - [Listener](listeners/listener.md)
 - [Base Listener](listeners/base_listener.md)
 
+## Structures
+- [Config](structures/config.md)
+- [Api Object](structures/api_object.md)
+
+## FSM
+- [State](fsm/state.md)
+- [States](fsm/states.md)
+
+## Helpers
 # FSM
 - [State](fsm/state.md)
 - [States](fsm/states.md)
@@ -32,13 +36,17 @@
 - [Html](helpers/html.md)
 - [Snake Case Converter](helpers/snake_case_converter.md)
 
-# Validator
+## Validator
 - [Token](validator/token.md)
 
-# Bot
-- [Bot](bot/bot.md)
+## Exceptions
+- [Bot Exception](exceptions/bot_exception.md)
+- [Token Exception](exceptions/token_exception.md)
 
-# Types
+## CLI
+- [CLI](cli/cli.md)
+
+## Types
 - [Base](types/base.md)
 - [Affiliate Info](types/affiliate_info.md)
 - [Inline Keyboard Button](types/inline_keyboard_button.md)

@@ -1,91 +1,89 @@
 # Bot
 
-The core component of the Surfgram framework that handles all Telegram Bot API interactions and update processing.
+## Package
+```python
+from surfgram import Bot
+```
 
-## Key Responsibilities
-- Manages bot authentication and session
-- Provides interface to Telegram Bot API
-- Handles incoming updates
-- Routes updates to appropriate handlers
+## Class Description
+The `Bot` class provides a high-level interface for interacting with the Telegram Bot API, featuring dynamic method dispatch and configurable execution modes.
 
-## Core Features
+## Constructor
+```python
+Bot(config: BaseConfig, debug_mode: bool = False)
+```
 
-### Dynamic API Access
-Call any Telegram Bot API method directly as bot methods:
+### Parameters
+| Parameter   | Type       | Required | Default | Description |
+|-------------|------------|----------|---------|-------------|
+| `config`    | BaseConfig | Yes      | -       | Configuration object implementing `BaseConfig` interface |
+| `debug_mode`| bool       | No       | False   | Enables verbose logging for debugging purposes |
+
+### Configuration Requirements
+The configuration object must implement all required parameters specified in the [Surfgram Configuration Documentation][https://github.com/surfgram/surfgram-docs/blob/main/structures/config.md]
+
+## Public Interface
+
+### Dynamic Method Dispatch
+```python
+__getattr__(method_name: str) -> Callable
+```
+
+#### Description
+Provides dynamic access to all Telegram Bot API methods through Pythonic method calls.
+
+#### Behavior
+1. Translates method calls to corresponding Telegram API endpoints
+2. Converts snake_case method names to camelCase API endpoints
+3. Automatically formats request payloads
+
+#### Example
+```python
+# Python method call
+bot.send_message(chat_id=123, text="Test")
+
+# Equivalent API request
+POST /sendMessage
+{
+  "chat_id": 123,
+  "text": "Test"
+}
+```
+
+#### Supported Methods
+All methods listed in the official [Telegram Bot API Documentation](https://core.telegram.org/bots/api) are supported.
+
+### Event Processing
+```python
+listen() -> None
+```
+
+#### Description
+Initiates the bot's event processing loop based on configured listener implementation.
+
+#### Features
+- Implements long-polling for update retrieval
+- Processes updates through configured handler pipeline
+- Maintains persistent connection to Telegram servers
+
+#### Requirements
+The configuration must include a properly initialized listener component. See [Listener Configuration Guide](https://github.com/surfgram/surfgram-docs/blob/main/listeners).
+
+## Usage Example
 
 ```python
-# Send message
-await bot.send_message(
-    chat_id=12345,
-    text="Hello from Surfgram!"
+from surfgram import Bot
+from config import Config
+
+config = Config()
+bot = Bot(config=config, debug_mode=True)
+
+bot.send_message(
+    chat_id=1337107725,
+    text="Hello, world",
+    parse_mode="MarkdownV2"
 )
 
-# Get user profile photos
-photos = await bot.get_user_profile_photos(user_id=12345)
+# Start event loop
+bot.listen()
 ```
-
-### Update Processing Pipeline
-1. Receives updates via long polling
-2. Converts to `APIObject` instances
-3. Routes to registered handlers
-4. Maintains update offset
-
-### Built-in Error Handling
-- Automatic token validation
-- API error detection
-- Debug logging support
-
-## Initialization
-
-```python
-from surfgram.core.bot import Bot
-from config import BotConfig  # Your config class
-
-bot = Bot(config=BotConfig, debug_mode=True)
-```
-
-## Common Usage Patterns
-
-### 1. Sending API Requests
-```python
-# Send photo
-await bot.send_photo(
-    chat_id=update.message.chat.id,
-    photo=open('image.jpg', 'rb')
-)
-
-# Edit message
-await bot.edit_message_text(
-    chat_id=chat_id,
-    message_id=msg_id,
-    text="Updated text"
-)
-```
-
-### 2. Handling Updates
-```python
-class MessageLogger(Listener):
-    async def on_update(self, update):
-        print(f"New update: {update}")
-        await super().on_update(update)  # Continue normal processing
-```
-
-### 3. Custom API Wrappers
-```python
-async def send_hello(bot, chat_id):
-    await bot.send_message(
-        chat_id=chat_id,
-        text="Hello!"
-    )
-```
-
-## Advanced Configuration
-- Set custom `offset` and `timeout` in listener
-- Override request handling in `_make_request`
-- Extend with custom middleware
-
-## Best Practices
-- Initialize once per application
-- Reuse bot instance across handlers
-- Access through dependency injection
-- Wrap in context managers for resource cleanup

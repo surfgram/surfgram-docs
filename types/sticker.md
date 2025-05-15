@@ -1,83 +1,65 @@
-# Sticker Handler
+# Sticker
 
 Telegram Bot API Sticker type
 
-## Usage
+## Overview
 
-To create a Sticker handler, you need to:
+| Property        | Type               | Required | Default | Description                              |
+|-----------------|--------------------|----------|---------|------------------------------------------|
+| `__is_active__` | `bool`             | No       | `True`  | Global handler switch                   |
+| `__names__`     | `List[str]`        | No       | `[]`    | Trigger filter (empty = all)            |
+| `__callback__`  | `Callable`         | **Yes**  | -       | Async handler function                  |
 
-1. Create a class inheriting from `Sticker`
-2. Implement the required properties
-3. Define your callback function
+## Implementation Guide
 
-### Example Implementation
+### Basic Template
 
 ```python
+from typing import List, Callable
 from surfgram.types import Sticker
-from typing import Callable
 
-
-class ExampleSticker(Sticker):
-    """Custom handler for Sticker events"""
-    
+class MyStickerHandler(Sticker):    
+    @property
+    def __is_active__(self) -> bool:
+        return True  # Set False to disable
+        
     @property
     def __names__(self) -> List[str]:
-        """List of trigger names for this handler"""
-        return ["example_sticker"]
-    
+        return []  # ['specific_trigger'] for filtered handling
+        
     @property
     def __callback__(self) -> Callable:
-        """Returns the handler function"""
-        return self.handle
-    
-    async def handle(self, update, bot):
-        """Processes the Sticker event"""
-        # Your implementation here
-        pass
+        return self.process_event
+        
+    async def process_event(self, update: dict, bot) -> None:
+        """Main handler logic"""
+        # Implement your processing here
 ```
 
-## Required Properties
+### Field Reference
 
-### `__names__`
-- **Type**: `List[str]`
-- **Description**: List of trigger names that will activate this handler
-- **Example**: `return ["start", "begin"]`
+The update object contains these fields:
 
-### `__callback__`
-- **Type**: `Callable`
-- **Description**: Returns the async function that will process the event
-- **Signature**: `async def callback(update, bot) -> None`
+| Field          | Type              | Description                     |
+|----------------|-------------------|---------------------------------|
+| `file_id` | `str` | Identifier for this file, which can be used to download or reuse the file |
+| `file_unique_id` | `str` | Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file. |
+| `type` | `str` | Type of the sticker, currently one of "regular", "mask", "custom_emoji". The type of the sticker is independent from its format, which is determined by the fields is_animated and is_video. |
+| `width` | `int` | Sticker width |
+| `height` | `int` | Sticker height |
+| `is_animated` | `bool` | True, if the sticker is animated |
+| `is_video` | `bool` | True, if the sticker is a video sticker |
+| `thumbnail` | `PhotoSize` | Optional. Sticker thumbnail in the .WEBP or .JPG format |
+| `emoji` | `str` | Optional. Emoji associated with the sticker |
+| `set_name` | `str` | Optional. Name of the sticker set to which the sticker belongs |
+| `premium_animation` | `File` | Optional. For premium regular stickers, premium animation for the sticker |
+| `mask_position` | `MaskPosition` | Optional. For mask stickers, the position where the mask should be placed |
+| `custom_emoji_id` | `str` | Optional. For custom emoji stickers, unique identifier of the custom emoji |
+| `needs_repainting` | `bool` | Optional. True, if the sticker must be repainted to a text color in messages, the color of the Telegram Premium badge in emoji status, white color on chat photos, or another appropriate color in other places |
+| `file_size` | `int` | Optional. File size in bytes |
 
-## Handler Method
+## Best Practices
 
-Your handler method should have the following signature:
-
-```python
-async def handle(self, update, bot):
-    """Processes the Sticker event
-    
-    Args:
-        update: The incoming update object
-        bot: The bot instance for API calls
-    """
-```
-
-## Available Fields
-
-The update object will contain these fields (if applicable):
-
-- `file_id` (str): Identifier for this file, which can be used to download or reuse the file
-- `file_unique_id` (str): Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
-- `type` (str): Type of the sticker, currently one of "regular", "mask", "custom_emoji". The type of the sticker is independent from its format, which is determined by the fields is_animated and is_video.
-- `width` (int): Sticker width
-- `height` (int): Sticker height
-- `is_animated` (bool): True, if the sticker is animated
-- `is_video` (bool): True, if the sticker is a video sticker
-- `thumbnail` (PhotoSize): Optional. Sticker thumbnail in the .WEBP or .JPG format
-- `emoji` (str): Optional. Emoji associated with the sticker
-- `set_name` (str): Optional. Name of the sticker set to which the sticker belongs
-- `premium_animation` (File): Optional. For premium regular stickers, premium animation for the sticker
-- `mask_position` (MaskPosition): Optional. For mask stickers, the position where the mask should be placed
-- `custom_emoji_id` (str): Optional. For custom emoji stickers, unique identifier of the custom emoji
-- `needs_repainting` (bool): Optional. True, if the sticker must be repainted to a text color in messages, the color of the Telegram Premium badge in emoji status, white color on chat photos, or another appropriate color in other places
-- `file_size` (int): Optional. File size in bytes
+1. **Naming**: 
+   - Use descriptive class names (`PaymentHandler` vs `Handler1`)
+   - Prefix related handlers (`AdminCommands`, `UserCommands`)

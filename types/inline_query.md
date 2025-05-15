@@ -1,74 +1,56 @@
-# InlineQuery Handler
+# InlineQuery
 
 Telegram Bot API InlineQuery type
 
-## Usage
+## Overview
 
-To create a InlineQuery handler, you need to:
+| Property        | Type               | Required | Default | Description                              |
+|-----------------|--------------------|----------|---------|------------------------------------------|
+| `__is_active__` | `bool`             | No       | `True`  | Global handler switch                   |
+| `__names__`     | `List[str]`        | No       | `[]`    | Trigger filter (empty = all)            |
+| `__callback__`  | `Callable`         | **Yes**  | -       | Async handler function                  |
 
-1. Create a class inheriting from `InlineQuery`
-2. Implement the required properties
-3. Define your callback function
+## Implementation Guide
 
-### Example Implementation
+### Basic Template
 
 ```python
+from typing import List, Callable
 from surfgram.types import InlineQuery
-from typing import Callable
 
-
-class ExampleInlineQuery(InlineQuery):
-    """Custom handler for InlineQuery events"""
-    
+class MyInlineQueryHandler(InlineQuery):    
+    @property
+    def __is_active__(self) -> bool:
+        return True  # Set False to disable
+        
     @property
     def __names__(self) -> List[str]:
-        """List of trigger names for this handler"""
-        return ["example_inline_query"]
-    
+        return []  # ['specific_trigger'] for filtered handling
+        
     @property
     def __callback__(self) -> Callable:
-        """Returns the handler function"""
-        return self.handle
-    
-    async def handle(self, update, bot):
-        """Processes the InlineQuery event"""
-        # Your implementation here
-        pass
+        return self.process_event
+        
+    async def process_event(self, update: dict, bot) -> None:
+        """Main handler logic"""
+        # Implement your processing here
 ```
 
-## Required Properties
+### Field Reference
 
-### `__names__`
-- **Type**: `List[str]`
-- **Description**: List of trigger names that will activate this handler
-- **Example**: `return ["start", "begin"]`
+The update object contains these fields:
 
-### `__callback__`
-- **Type**: `Callable`
-- **Description**: Returns the async function that will process the event
-- **Signature**: `async def callback(update, bot) -> None`
+| Field          | Type              | Description                     |
+|----------------|-------------------|---------------------------------|
+| `id` | `str` | Unique identifier for this query |
+| `from` | `User` | Sender |
+| `query` | `str` | Text of the query (up to 256 characters) |
+| `offset` | `str` | Offset of the results to be returned, can be controlled by the bot |
+| `chat_type` | `str` | Optional. Type of the chat from which the inline query was sent. Can be either "sender" for a private chat with the inline query sender, "private", "group", "supergroup", or "channel". The chat type should be always known for requests sent from official clients and most third-party clients, unless the request was sent from a secret chat |
+| `location` | `Location` | Optional. Sender location, only for bots that request user location |
 
-## Handler Method
+## Best Practices
 
-Your handler method should have the following signature:
-
-```python
-async def handle(self, update, bot):
-    """Processes the InlineQuery event
-    
-    Args:
-        update: The incoming update object
-        bot: The bot instance for API calls
-    """
-```
-
-## Available Fields
-
-The update object will contain these fields (if applicable):
-
-- `id` (str): Unique identifier for this query
-- `from` (User): Sender
-- `query` (str): Text of the query (up to 256 characters)
-- `offset` (str): Offset of the results to be returned, can be controlled by the bot
-- `chat_type` (str): Optional. Type of the chat from which the inline query was sent. Can be either "sender" for a private chat with the inline query sender, "private", "group", "supergroup", or "channel". The chat type should be always known for requests sent from official clients and most third-party clients, unless the request was sent from a secret chat
-- `location` (Location): Optional. Sender location, only for bots that request user location
+1. **Naming**: 
+   - Use descriptive class names (`PaymentHandler` vs `Handler1`)
+   - Prefix related handlers (`AdminCommands`, `UserCommands`)

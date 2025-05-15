@@ -1,71 +1,53 @@
-# OwnedGifts Handler
+# OwnedGifts
 
 Telegram Bot API OwnedGifts type
 
-## Usage
+## Overview
 
-To create a OwnedGifts handler, you need to:
+| Property        | Type               | Required | Default | Description                              |
+|-----------------|--------------------|----------|---------|------------------------------------------|
+| `__is_active__` | `bool`             | No       | `True`  | Global handler switch                   |
+| `__names__`     | `List[str]`        | No       | `[]`    | Trigger filter (empty = all)            |
+| `__callback__`  | `Callable`         | **Yes**  | -       | Async handler function                  |
 
-1. Create a class inheriting from `OwnedGifts`
-2. Implement the required properties
-3. Define your callback function
+## Implementation Guide
 
-### Example Implementation
+### Basic Template
 
 ```python
+from typing import List, Callable
 from surfgram.types import OwnedGifts
-from typing import Callable
 
-
-class ExampleOwnedGifts(OwnedGifts):
-    """Custom handler for OwnedGifts events"""
-    
+class MyOwnedGiftsHandler(OwnedGifts):    
+    @property
+    def __is_active__(self) -> bool:
+        return True  # Set False to disable
+        
     @property
     def __names__(self) -> List[str]:
-        """List of trigger names for this handler"""
-        return ["example_owned_gifts"]
-    
+        return []  # ['specific_trigger'] for filtered handling
+        
     @property
     def __callback__(self) -> Callable:
-        """Returns the handler function"""
-        return self.handle
-    
-    async def handle(self, update, bot):
-        """Processes the OwnedGifts event"""
-        # Your implementation here
-        pass
+        return self.process_event
+        
+    async def process_event(self, update: dict, bot) -> None:
+        """Main handler logic"""
+        # Implement your processing here
 ```
 
-## Required Properties
+### Field Reference
 
-### `__names__`
-- **Type**: `List[str]`
-- **Description**: List of trigger names that will activate this handler
-- **Example**: `return ["start", "begin"]`
+The update object contains these fields:
 
-### `__callback__`
-- **Type**: `Callable`
-- **Description**: Returns the async function that will process the event
-- **Signature**: `async def callback(update, bot) -> None`
+| Field          | Type              | Description                     |
+|----------------|-------------------|---------------------------------|
+| `total_count` | `int` | The total number of gifts owned by the user or the chat |
+| `gifts` | `List[OwnedGift]` | The list of gifts |
+| `next_offset` | `str` | Optional. Offset for the next request. If empty, then there are no more results |
 
-## Handler Method
+## Best Practices
 
-Your handler method should have the following signature:
-
-```python
-async def handle(self, update, bot):
-    """Processes the OwnedGifts event
-    
-    Args:
-        update: The incoming update object
-        bot: The bot instance for API calls
-    """
-```
-
-## Available Fields
-
-The update object will contain these fields (if applicable):
-
-- `total_count` (int): The total number of gifts owned by the user or the chat
-- `gifts` (List[OwnedGift]): The list of gifts
-- `next_offset` (str): Optional. Offset for the next request. If empty, then there are no more results
+1. **Naming**: 
+   - Use descriptive class names (`PaymentHandler` vs `Handler1`)
+   - Prefix related handlers (`AdminCommands`, `UserCommands`)

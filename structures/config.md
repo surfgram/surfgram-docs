@@ -1,41 +1,82 @@
 # BaseConfig
 
-An abstract class to configure your Telegram bot
-
-## Usage
-
-To create a bot configuration, you need to:
-
-1. Create a class inheriting from `BaseConfig`
-2. Set the required `__bot_token__` property
-3. Define the required `__listener__` property
-
-### Example Implementation
-
+## Package
 ```python
-from surfgram.configs import BaseConfig
-from typing import Any
-from surfgram.listeners import BaseListener
-
-
-class BotConfig(BaseConfig):
-    """Main configuration for your Telegram bot"""
-    
-    __bot_token__: str = "YOUR_BOT_TOKEN"
-    __listener__: BaseListener = MyListener()  # Changed type hint to BaseListener
+from surfgram import configs
 ```
 
-## Required Properties
-### `__bot_token__`
-- **Type**: `str`
-- **Description**: Your bot's authentication token obtained from [BotFather](https://t.me/BotFather) on Telegram
+## Class Description
+The `BaseConfig` class defines the essential configuration interface for bots. All concrete configuration implementations must inherit from this class.
 
-### `__listener__`
-- **Type**: `BaseListener` (from surfgram.listeners)
-- **Description**: The listener instance that will handle incoming updates (must inherit from BaseListener)
+## Configuration Requirements
+Subclasses must define:
+1. `__bot_token__`: Valid Telegram bot token string
+2. `__listener__` (optional): Configured event listener instance
 
-## Configuration Rules
+## Public Interface
 
-1. Your configuration class **must** inherit from `BaseConfig`
-2. Both `__bot_token__` and `__listener__` **must** be defined as class attributes
-3. The `__listener__` must be an instance of a class that inherits from `BaseListener`
+### Class Attributes
+
+#### `__bot_token__: str`
+**Description**:  
+Stores the bot's authentication token. Must be set by concrete implementations.
+
+**Requirements**:
+- Must match Telegram's token format
+- Should be kept secret
+- Must be set before bot initialization
+
+**Example**:
+```python
+class MyConfig(configs.BaseConfig):
+    __bot_token__ = "12345:validtokenstring"
+```
+
+#### `__listener__: Optional[Listener]` 
+**Description**:  
+Stores the configured event listener instance.
+
+**Default**: `None`
+
+**Usage Notes**:
+- Required for bots using the `listen()` method
+- Must implement the `Listener` protocol
+- Can be `None` for send-only bots
+
+### Methods
+
+#### `get_token() -> str`
+
+**Description**:  
+Safe accessor for the bot token.
+
+**Returns**:
+| Type | Description |
+|------|-------------|
+| `str` | Validated bot token string |
+
+**Usage**:
+```python
+token = MyConfig.get_token()
+```
+
+#### `get_listener() -> Optional[Listener]`
+
+**Description**:  
+Retrieves the configured event listener.
+
+**Returns**:
+| Type | Description |
+|------|-------------|
+| `Optional[Listener]` | Listener instance or None |
+
+
+## Example
+```python
+from surfgram import configs
+from surfgram import listeners
+
+class Config(configs.BaseConfig):
+    __bot_token__ = "12345:productiontoken"
+    __listener__ = listeners.BaseListener
+```

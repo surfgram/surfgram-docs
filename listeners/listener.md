@@ -1,46 +1,41 @@
 # Listener
 
-Abstract base class for handling Telegram bot updates
-
-## Interface Definition
-
+## Package
 ```python
-class Listener(ABC):
-    @abstractmethod
-    async def on_update(self, update: APIObject) -> None: ...
+from surfgram.core.listeners import Listener
 ```
 
-## Usage
+> **ARCHITECTURAL INTERFACE**  
+> This abstract class defines the core contract for all update listeners in the Surfgram framework.  
+> All concrete listener implementations must inherit from this interface.
 
-Implement this interface to create custom update handlers:
+## Class Description
+The `Listener` ABC (Abstract Base Class) establishes the fundamental protocol for processing Telegram bot updates, enforcing a consistent interface across:
+- Polling listeners
+- Webhook listeners
+- Custom listener implementations
 
+## Interface Contract
+#### Parameters
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `update`  | `APIObject` | Normalized update container with parsed data |
+
+#### Behavior Requirements
+Implementations must:
+1. Process updates within async context
+2. Handle all relevant update types
+3. Manage their own error handling
+4. Not block indefinitely (avoid event loop starvation)
+
+## Usage Guidelines
+
+### Implementation Example
 ```python
-class MyListener(Listener):
+class CustomListener(Listener):
     async def on_update(self, update: APIObject) -> None:
-        print(f"Received update: {update}")
-        # Your update processing logic here
+        if update.message:
+            await process_message(update.message)
+        elif update.callback_query:
+            await handle_callback(update.callback_query)
 ```
-
-## Key Features
-
-- **Asynchronous** processing (`async` method)
-- Receives updates as `APIObject` instances
-- Must be implemented by concrete handler classes
-- Core component of the bot's event system
-
-## Implementation Requirements
-
-1. Subclass `Listener`
-2. Implement `on_update` method
-3. Handle incoming updates (messages, callbacks, etc.)
-
-## Example Use Case
-
-```python
-class MessageLogger(Listener):
-    async def on_update(self, update: APIObject) -> None:
-        if hasattr(update, 'message'):
-            print(f"New message: {update.message.text}")
-```
-
-> Note: This is a public interface for creating custom bot update handlers.

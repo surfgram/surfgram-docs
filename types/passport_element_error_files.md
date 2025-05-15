@@ -1,72 +1,54 @@
-# PassportElementErrorFiles Handler
+# PassportElementErrorFiles
 
 Telegram Bot API PassportElementErrorFiles type
 
-## Usage
+## Overview
 
-To create a PassportElementErrorFiles handler, you need to:
+| Property        | Type               | Required | Default | Description                              |
+|-----------------|--------------------|----------|---------|------------------------------------------|
+| `__is_active__` | `bool`             | No       | `True`  | Global handler switch                   |
+| `__names__`     | `List[str]`        | No       | `[]`    | Trigger filter (empty = all)            |
+| `__callback__`  | `Callable`         | **Yes**  | -       | Async handler function                  |
 
-1. Create a class inheriting from `PassportElementErrorFiles`
-2. Implement the required properties
-3. Define your callback function
+## Implementation Guide
 
-### Example Implementation
+### Basic Template
 
 ```python
+from typing import List, Callable
 from surfgram.types import PassportElementErrorFiles
-from typing import Callable
 
-
-class ExamplePassportElementErrorFiles(PassportElementErrorFiles):
-    """Custom handler for PassportElementErrorFiles events"""
-    
+class MyPassportElementErrorFilesHandler(PassportElementErrorFiles):    
+    @property
+    def __is_active__(self) -> bool:
+        return True  # Set False to disable
+        
     @property
     def __names__(self) -> List[str]:
-        """List of trigger names for this handler"""
-        return ["example_passport_element_error_files"]
-    
+        return []  # ['specific_trigger'] for filtered handling
+        
     @property
     def __callback__(self) -> Callable:
-        """Returns the handler function"""
-        return self.handle
-    
-    async def handle(self, update, bot):
-        """Processes the PassportElementErrorFiles event"""
-        # Your implementation here
-        pass
+        return self.process_event
+        
+    async def process_event(self, update: dict, bot) -> None:
+        """Main handler logic"""
+        # Implement your processing here
 ```
 
-## Required Properties
+### Field Reference
 
-### `__names__`
-- **Type**: `List[str]`
-- **Description**: List of trigger names that will activate this handler
-- **Example**: `return ["start", "begin"]`
+The update object contains these fields:
 
-### `__callback__`
-- **Type**: `Callable`
-- **Description**: Returns the async function that will process the event
-- **Signature**: `async def callback(update, bot) -> None`
+| Field          | Type              | Description                     |
+|----------------|-------------------|---------------------------------|
+| `source` | `str` | Error source, must be files |
+| `type` | `str` | The section of the user's Telegram Passport which has the issue, one of "utility_bill", "bank_statement", "rental_agreement", "passport_registration", "temporary_registration" |
+| `file_hashes` | `List[str]` | List of base64-encoded file hashes |
+| `message` | `str` | Error message |
 
-## Handler Method
+## Best Practices
 
-Your handler method should have the following signature:
-
-```python
-async def handle(self, update, bot):
-    """Processes the PassportElementErrorFiles event
-    
-    Args:
-        update: The incoming update object
-        bot: The bot instance for API calls
-    """
-```
-
-## Available Fields
-
-The update object will contain these fields (if applicable):
-
-- `source` (str): Error source, must be files
-- `type` (str): The section of the user's Telegram Passport which has the issue, one of "utility_bill", "bank_statement", "rental_agreement", "passport_registration", "temporary_registration"
-- `file_hashes` (List[str]): List of base64-encoded file hashes
-- `message` (str): Error message
+1. **Naming**: 
+   - Use descriptive class names (`PaymentHandler` vs `Handler1`)
+   - Prefix related handlers (`AdminCommands`, `UserCommands`)
