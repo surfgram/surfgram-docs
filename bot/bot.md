@@ -87,6 +87,3 @@ bot.send_message(
 # Start event loop
 bot.listen()
 ```
-
-
-[./structures/config.md]: ././structures/config.md
