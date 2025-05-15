@@ -18,9 +18,7 @@ Telegram Bot API ChatMemberAdministrator type
 from typing import List, Callable
 from surfgram.types import ChatMemberAdministrator
 
-class MyChatMemberAdministratorHandler(ChatMemberAdministrator):
-    """"""
-    
+class MyChatMemberAdministratorHandler(ChatMemberAdministrator):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

@@ -18,9 +18,7 @@ Telegram Bot API ForumTopic type
 from typing import List, Callable
 from surfgram.types import ForumTopic
 
-class MyForumTopicHandler(ForumTopic):
-    """"""
-    
+class MyForumTopicHandler(ForumTopic):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

@@ -18,9 +18,7 @@ Telegram Bot API AffiliateInfo type
 from typing import List, Callable
 from surfgram.types import AffiliateInfo
 
-class MyAffiliateInfoHandler(AffiliateInfo):
-    """"""
-    
+class MyAffiliateInfoHandler(AffiliateInfo):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

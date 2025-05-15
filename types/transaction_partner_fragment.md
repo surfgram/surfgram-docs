@@ -18,9 +18,7 @@ Telegram Bot API TransactionPartnerFragment type
 from typing import List, Callable
 from surfgram.types import TransactionPartnerFragment
 
-class MyTransactionPartnerFragmentHandler(TransactionPartnerFragment):
-    """"""
-    
+class MyTransactionPartnerFragmentHandler(TransactionPartnerFragment):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

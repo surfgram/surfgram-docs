@@ -18,9 +18,7 @@ Telegram Bot API EncryptedPassportElement type
 from typing import List, Callable
 from surfgram.types import EncryptedPassportElement
 
-class MyEncryptedPassportElementHandler(EncryptedPassportElement):
-    """"""
-    
+class MyEncryptedPassportElementHandler(EncryptedPassportElement):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

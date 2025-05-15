@@ -18,9 +18,7 @@ Telegram Bot API InlineQueryResultPhoto type
 from typing import List, Callable
 from surfgram.types import InlineQueryResultPhoto
 
-class MyInlineQueryResultPhotoHandler(InlineQueryResultPhoto):
-    """"""
-    
+class MyInlineQueryResultPhotoHandler(InlineQueryResultPhoto):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

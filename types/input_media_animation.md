@@ -18,9 +18,7 @@ Telegram Bot API InputMediaAnimation type
 from typing import List, Callable
 from surfgram.types import InputMediaAnimation
 
-class MyInputMediaAnimationHandler(InputMediaAnimation):
-    """"""
-    
+class MyInputMediaAnimationHandler(InputMediaAnimation):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

@@ -18,9 +18,7 @@ Telegram Bot API CallbackQuery type
 from typing import List, Callable
 from surfgram.types import CallbackQuery
 
-class MyCallbackQueryHandler(CallbackQuery):
-    """"""
-    
+class MyCallbackQueryHandler(CallbackQuery):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

@@ -18,9 +18,7 @@ Telegram Bot API Document type
 from typing import List, Callable
 from surfgram.types import Document
 
-class MyDocumentHandler(Document):
-    """"""
-    
+class MyDocumentHandler(Document):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

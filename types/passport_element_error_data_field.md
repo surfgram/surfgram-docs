@@ -18,9 +18,7 @@ Telegram Bot API PassportElementErrorDataField type
 from typing import List, Callable
 from surfgram.types import PassportElementErrorDataField
 
-class MyPassportElementErrorDataFieldHandler(PassportElementErrorDataField):
-    """"""
-    
+class MyPassportElementErrorDataFieldHandler(PassportElementErrorDataField):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

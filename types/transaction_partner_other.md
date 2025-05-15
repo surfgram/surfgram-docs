@@ -18,9 +18,7 @@ Telegram Bot API TransactionPartnerOther type
 from typing import List, Callable
 from surfgram.types import TransactionPartnerOther
 
-class MyTransactionPartnerOtherHandler(TransactionPartnerOther):
-    """"""
-    
+class MyTransactionPartnerOtherHandler(TransactionPartnerOther):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

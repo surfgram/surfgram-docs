@@ -18,9 +18,7 @@ Telegram Bot API EncryptedCredentials type
 from typing import List, Callable
 from surfgram.types import EncryptedCredentials
 
-class MyEncryptedCredentialsHandler(EncryptedCredentials):
-    """"""
-    
+class MyEncryptedCredentialsHandler(EncryptedCredentials):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

@@ -18,9 +18,7 @@ Telegram Bot API User type
 from typing import List, Callable
 from surfgram.types import User
 
-class MyUserHandler(User):
-    """"""
-    
+class MyUserHandler(User):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

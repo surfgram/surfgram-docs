@@ -18,9 +18,7 @@ Telegram Bot API BusinessBotRights type
 from typing import List, Callable
 from surfgram.types import BusinessBotRights
 
-class MyBusinessBotRightsHandler(BusinessBotRights):
-    """"""
-    
+class MyBusinessBotRightsHandler(BusinessBotRights):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

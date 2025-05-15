@@ -18,9 +18,7 @@ Telegram Bot API BackgroundTypeWallpaper type
 from typing import List, Callable
 from surfgram.types import BackgroundTypeWallpaper
 
-class MyBackgroundTypeWallpaperHandler(BackgroundTypeWallpaper):
-    """"""
-    
+class MyBackgroundTypeWallpaperHandler(BackgroundTypeWallpaper):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

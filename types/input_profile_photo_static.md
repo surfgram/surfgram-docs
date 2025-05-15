@@ -18,9 +18,7 @@ Telegram Bot API InputProfilePhotoStatic type
 from typing import List, Callable
 from surfgram.types import InputProfilePhotoStatic
 
-class MyInputProfilePhotoStaticHandler(InputProfilePhotoStatic):
-    """"""
-    
+class MyInputProfilePhotoStaticHandler(InputProfilePhotoStatic):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

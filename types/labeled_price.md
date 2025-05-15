@@ -18,9 +18,7 @@ Telegram Bot API LabeledPrice type
 from typing import List, Callable
 from surfgram.types import LabeledPrice
 
-class MyLabeledPriceHandler(LabeledPrice):
-    """"""
-    
+class MyLabeledPriceHandler(LabeledPrice):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

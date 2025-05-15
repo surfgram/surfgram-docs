@@ -18,9 +18,7 @@ Telegram Bot API InlineQueryResultCachedGif type
 from typing import List, Callable
 from surfgram.types import InlineQueryResultCachedGif
 
-class MyInlineQueryResultCachedGifHandler(InlineQueryResultCachedGif):
-    """"""
-    
+class MyInlineQueryResultCachedGifHandler(InlineQueryResultCachedGif):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

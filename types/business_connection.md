@@ -18,9 +18,7 @@ Telegram Bot API BusinessConnection type
 from typing import List, Callable
 from surfgram.types import BusinessConnection
 
-class MyBusinessConnectionHandler(BusinessConnection):
-    """"""
-    
+class MyBusinessConnectionHandler(BusinessConnection):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

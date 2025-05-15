@@ -18,9 +18,7 @@ Telegram Bot API MessageId type
 from typing import List, Callable
 from surfgram.types import MessageId
 
-class MyMessageIdHandler(MessageId):
-    """"""
-    
+class MyMessageIdHandler(MessageId):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

@@ -18,9 +18,7 @@ Telegram Bot API SuccessfulPayment type
 from typing import List, Callable
 from surfgram.types import SuccessfulPayment
 
-class MySuccessfulPaymentHandler(SuccessfulPayment):
-    """"""
-    
+class MySuccessfulPaymentHandler(SuccessfulPayment):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

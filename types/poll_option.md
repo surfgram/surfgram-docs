@@ -18,9 +18,7 @@ Telegram Bot API PollOption type
 from typing import List, Callable
 from surfgram.types import PollOption
 
-class MyPollOptionHandler(PollOption):
-    """"""
-    
+class MyPollOptionHandler(PollOption):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

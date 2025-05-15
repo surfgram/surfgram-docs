@@ -18,9 +18,7 @@ Telegram Bot API PassportElementErrorSelfie type
 from typing import List, Callable
 from surfgram.types import PassportElementErrorSelfie
 
-class MyPassportElementErrorSelfieHandler(PassportElementErrorSelfie):
-    """"""
-    
+class MyPassportElementErrorSelfieHandler(PassportElementErrorSelfie):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

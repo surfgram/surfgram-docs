@@ -18,9 +18,7 @@ Telegram Bot API StoryAreaTypeLocation type
 from typing import List, Callable
 from surfgram.types import StoryAreaTypeLocation
 
-class MyStoryAreaTypeLocationHandler(StoryAreaTypeLocation):
-    """"""
-    
+class MyStoryAreaTypeLocationHandler(StoryAreaTypeLocation):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

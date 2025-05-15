@@ -18,9 +18,7 @@ Telegram Bot API PaidMediaVideo type
 from typing import List, Callable
 from surfgram.types import PaidMediaVideo
 
-class MyPaidMediaVideoHandler(PaidMediaVideo):
-    """"""
-    
+class MyPaidMediaVideoHandler(PaidMediaVideo):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

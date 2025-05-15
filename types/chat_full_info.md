@@ -18,9 +18,7 @@ Telegram Bot API ChatFullInfo type
 from typing import List, Callable
 from surfgram.types import ChatFullInfo
 
-class MyChatFullInfoHandler(ChatFullInfo):
-    """"""
-    
+class MyChatFullInfoHandler(ChatFullInfo):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

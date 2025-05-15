@@ -18,9 +18,7 @@ Telegram Bot API OwnedGiftRegular type
 from typing import List, Callable
 from surfgram.types import OwnedGiftRegular
 
-class MyOwnedGiftRegularHandler(OwnedGiftRegular):
-    """"""
-    
+class MyOwnedGiftRegularHandler(OwnedGiftRegular):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

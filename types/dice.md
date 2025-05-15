@@ -18,9 +18,7 @@ Telegram Bot API Dice type
 from typing import List, Callable
 from surfgram.types import Dice
 
-class MyDiceHandler(Dice):
-    """"""
-    
+class MyDiceHandler(Dice):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

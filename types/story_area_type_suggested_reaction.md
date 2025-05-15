@@ -18,9 +18,7 @@ Telegram Bot API StoryAreaTypeSuggestedReaction type
 from typing import List, Callable
 from surfgram.types import StoryAreaTypeSuggestedReaction
 
-class MyStoryAreaTypeSuggestedReactionHandler(StoryAreaTypeSuggestedReaction):
-    """"""
-    
+class MyStoryAreaTypeSuggestedReactionHandler(StoryAreaTypeSuggestedReaction):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

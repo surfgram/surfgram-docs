@@ -18,9 +18,7 @@ Telegram Bot API MessageAutoDeleteTimerChanged type
 from typing import List, Callable
 from surfgram.types import MessageAutoDeleteTimerChanged
 
-class MyMessageAutoDeleteTimerChangedHandler(MessageAutoDeleteTimerChanged):
-    """"""
-    
+class MyMessageAutoDeleteTimerChangedHandler(MessageAutoDeleteTimerChanged):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

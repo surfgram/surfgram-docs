@@ -18,9 +18,7 @@ Telegram Bot API InlineQueryResultVoice type
 from typing import List, Callable
 from surfgram.types import InlineQueryResultVoice
 
-class MyInlineQueryResultVoiceHandler(InlineQueryResultVoice):
-    """"""
-    
+class MyInlineQueryResultVoiceHandler(InlineQueryResultVoice):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

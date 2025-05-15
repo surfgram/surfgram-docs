@@ -18,9 +18,7 @@ Telegram Bot API InlineQuery type
 from typing import List, Callable
 from surfgram.types import InlineQuery
 
-class MyInlineQueryHandler(InlineQuery):
-    """"""
-    
+class MyInlineQueryHandler(InlineQuery):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

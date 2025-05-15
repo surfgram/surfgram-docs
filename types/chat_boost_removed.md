@@ -18,9 +18,7 @@ Telegram Bot API ChatBoostRemoved type
 from typing import List, Callable
 from surfgram.types import ChatBoostRemoved
 
-class MyChatBoostRemovedHandler(ChatBoostRemoved):
-    """"""
-    
+class MyChatBoostRemovedHandler(ChatBoostRemoved):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

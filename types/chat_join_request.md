@@ -18,9 +18,7 @@ Telegram Bot API ChatJoinRequest type
 from typing import List, Callable
 from surfgram.types import ChatJoinRequest
 
-class MyChatJoinRequestHandler(ChatJoinRequest):
-    """"""
-    
+class MyChatJoinRequestHandler(ChatJoinRequest):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

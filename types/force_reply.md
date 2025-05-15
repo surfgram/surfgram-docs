@@ -18,9 +18,7 @@ Telegram Bot API ForceReply type
 from typing import List, Callable
 from surfgram.types import ForceReply
 
-class MyForceReplyHandler(ForceReply):
-    """"""
-    
+class MyForceReplyHandler(ForceReply):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

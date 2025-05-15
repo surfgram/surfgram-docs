@@ -18,9 +18,7 @@ Telegram Bot API StoryAreaPosition type
 from typing import List, Callable
 from surfgram.types import StoryAreaPosition
 
-class MyStoryAreaPositionHandler(StoryAreaPosition):
-    """"""
-    
+class MyStoryAreaPositionHandler(StoryAreaPosition):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

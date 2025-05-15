@@ -18,9 +18,7 @@ Telegram Bot API Animation type
 from typing import List, Callable
 from surfgram.types import Animation
 
-class MyAnimationHandler(Animation):
-    """"""
-    
+class MyAnimationHandler(Animation):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

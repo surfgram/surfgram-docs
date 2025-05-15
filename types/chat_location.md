@@ -18,9 +18,7 @@ Telegram Bot API ChatLocation type
 from typing import List, Callable
 from surfgram.types import ChatLocation
 
-class MyChatLocationHandler(ChatLocation):
-    """"""
-    
+class MyChatLocationHandler(ChatLocation):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

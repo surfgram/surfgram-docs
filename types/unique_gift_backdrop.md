@@ -18,9 +18,7 @@ Telegram Bot API UniqueGiftBackdrop type
 from typing import List, Callable
 from surfgram.types import UniqueGiftBackdrop
 
-class MyUniqueGiftBackdropHandler(UniqueGiftBackdrop):
-    """"""
-    
+class MyUniqueGiftBackdropHandler(UniqueGiftBackdrop):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

@@ -18,9 +18,7 @@ Telegram Bot API ShippingAddress type
 from typing import List, Callable
 from surfgram.types import ShippingAddress
 
-class MyShippingAddressHandler(ShippingAddress):
-    """"""
-    
+class MyShippingAddressHandler(ShippingAddress):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

@@ -18,9 +18,7 @@ Telegram Bot API ChatBoostSourceGiveaway type
 from typing import List, Callable
 from surfgram.types import ChatBoostSourceGiveaway
 
-class MyChatBoostSourceGiveawayHandler(ChatBoostSourceGiveaway):
-    """"""
-    
+class MyChatBoostSourceGiveawayHandler(ChatBoostSourceGiveaway):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

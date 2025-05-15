@@ -18,9 +18,7 @@ Telegram Bot API ChatMemberUpdated type
 from typing import List, Callable
 from surfgram.types import ChatMemberUpdated
 
-class MyChatMemberUpdatedHandler(ChatMemberUpdated):
-    """"""
-    
+class MyChatMemberUpdatedHandler(ChatMemberUpdated):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

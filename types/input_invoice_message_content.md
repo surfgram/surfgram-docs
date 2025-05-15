@@ -18,9 +18,7 @@ Telegram Bot API InputInvoiceMessageContent type
 from typing import List, Callable
 from surfgram.types import InputInvoiceMessageContent
 
-class MyInputInvoiceMessageContentHandler(InputInvoiceMessageContent):
-    """"""
-    
+class MyInputInvoiceMessageContentHandler(InputInvoiceMessageContent):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

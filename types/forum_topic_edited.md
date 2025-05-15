@@ -18,9 +18,7 @@ Telegram Bot API ForumTopicEdited type
 from typing import List, Callable
 from surfgram.types import ForumTopicEdited
 
-class MyForumTopicEditedHandler(ForumTopicEdited):
-    """"""
-    
+class MyForumTopicEditedHandler(ForumTopicEdited):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

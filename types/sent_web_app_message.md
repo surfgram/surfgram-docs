@@ -18,9 +18,7 @@ Telegram Bot API SentWebAppMessage type
 from typing import List, Callable
 from surfgram.types import SentWebAppMessage
 
-class MySentWebAppMessageHandler(SentWebAppMessage):
-    """"""
-    
+class MySentWebAppMessageHandler(SentWebAppMessage):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

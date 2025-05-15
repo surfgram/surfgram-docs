@@ -18,9 +18,7 @@ Telegram Bot API CopyTextButton type
 from typing import List, Callable
 from surfgram.types import CopyTextButton
 
-class MyCopyTextButtonHandler(CopyTextButton):
-    """"""
-    
+class MyCopyTextButtonHandler(CopyTextButton):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

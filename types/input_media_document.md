@@ -18,9 +18,7 @@ Telegram Bot API InputMediaDocument type
 from typing import List, Callable
 from surfgram.types import InputMediaDocument
 
-class MyInputMediaDocumentHandler(InputMediaDocument):
-    """"""
-    
+class MyInputMediaDocumentHandler(InputMediaDocument):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

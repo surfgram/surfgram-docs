@@ -18,9 +18,7 @@ Telegram Bot API OwnedGiftUnique type
 from typing import List, Callable
 from surfgram.types import OwnedGiftUnique
 
-class MyOwnedGiftUniqueHandler(OwnedGiftUnique):
-    """"""
-    
+class MyOwnedGiftUniqueHandler(OwnedGiftUnique):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

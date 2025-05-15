@@ -18,9 +18,7 @@ Telegram Bot API TextQuote type
 from typing import List, Callable
 from surfgram.types import TextQuote
 
-class MyTextQuoteHandler(TextQuote):
-    """"""
-    
+class MyTextQuoteHandler(TextQuote):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

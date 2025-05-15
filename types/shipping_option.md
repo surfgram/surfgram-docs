@@ -18,9 +18,7 @@ Telegram Bot API ShippingOption type
 from typing import List, Callable
 from surfgram.types import ShippingOption
 
-class MyShippingOptionHandler(ShippingOption):
-    """"""
-    
+class MyShippingOptionHandler(ShippingOption):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

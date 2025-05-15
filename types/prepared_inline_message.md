@@ -18,9 +18,7 @@ Telegram Bot API PreparedInlineMessage type
 from typing import List, Callable
 from surfgram.types import PreparedInlineMessage
 
-class MyPreparedInlineMessageHandler(PreparedInlineMessage):
-    """"""
-    
+class MyPreparedInlineMessageHandler(PreparedInlineMessage):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

@@ -18,9 +18,7 @@ Telegram Bot API PaidMediaInfo type
 from typing import List, Callable
 from surfgram.types import PaidMediaInfo
 
-class MyPaidMediaInfoHandler(PaidMediaInfo):
-    """"""
-    
+class MyPaidMediaInfoHandler(PaidMediaInfo):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

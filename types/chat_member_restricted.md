@@ -18,9 +18,7 @@ Telegram Bot API ChatMemberRestricted type
 from typing import List, Callable
 from surfgram.types import ChatMemberRestricted
 
-class MyChatMemberRestrictedHandler(ChatMemberRestricted):
-    """"""
-    
+class MyChatMemberRestrictedHandler(ChatMemberRestricted):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

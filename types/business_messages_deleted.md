@@ -18,9 +18,7 @@ Telegram Bot API BusinessMessagesDeleted type
 from typing import List, Callable
 from surfgram.types import BusinessMessagesDeleted
 
-class MyBusinessMessagesDeletedHandler(BusinessMessagesDeleted):
-    """"""
-    
+class MyBusinessMessagesDeletedHandler(BusinessMessagesDeleted):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

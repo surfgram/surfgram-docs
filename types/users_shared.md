@@ -18,9 +18,7 @@ Telegram Bot API UsersShared type
 from typing import List, Callable
 from surfgram.types import UsersShared
 
-class MyUsersSharedHandler(UsersShared):
-    """"""
-    
+class MyUsersSharedHandler(UsersShared):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

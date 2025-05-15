@@ -18,9 +18,7 @@ Telegram Bot API WebAppInfo type
 from typing import List, Callable
 from surfgram.types import WebAppInfo
 
-class MyWebAppInfoHandler(WebAppInfo):
-    """"""
-    
+class MyWebAppInfoHandler(WebAppInfo):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

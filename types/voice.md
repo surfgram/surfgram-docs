@@ -18,9 +18,7 @@ Telegram Bot API Voice type
 from typing import List, Callable
 from surfgram.types import Voice
 
-class MyVoiceHandler(Voice):
-    """"""
-    
+class MyVoiceHandler(Voice):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

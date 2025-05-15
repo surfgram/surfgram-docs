@@ -18,9 +18,7 @@ Telegram Bot API PassportElementErrorFile type
 from typing import List, Callable
 from surfgram.types import PassportElementErrorFile
 
-class MyPassportElementErrorFileHandler(PassportElementErrorFile):
-    """"""
-    
+class MyPassportElementErrorFileHandler(PassportElementErrorFile):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

@@ -18,9 +18,7 @@ Telegram Bot API Sticker type
 from typing import List, Callable
 from surfgram.types import Sticker
 
-class MyStickerHandler(Sticker):
-    """"""
-    
+class MyStickerHandler(Sticker):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

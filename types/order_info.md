@@ -18,9 +18,7 @@ Telegram Bot API OrderInfo type
 from typing import List, Callable
 from surfgram.types import OrderInfo
 
-class MyOrderInfoHandler(OrderInfo):
-    """"""
-    
+class MyOrderInfoHandler(OrderInfo):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

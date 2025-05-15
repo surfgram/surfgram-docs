@@ -18,9 +18,7 @@ Telegram Bot API BotCommandScopeAllChatAdministrators type
 from typing import List, Callable
 from surfgram.types import BotCommandScopeAllChatAdministrators
 
-class MyBotCommandScopeAllChatAdministratorsHandler(BotCommandScopeAllChatAdministrators):
-    """"""
-    
+class MyBotCommandScopeAllChatAdministratorsHandler(BotCommandScopeAllChatAdministrators):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

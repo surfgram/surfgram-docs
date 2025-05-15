@@ -18,9 +18,7 @@ Telegram Bot API ReactionCount type
 from typing import List, Callable
 from surfgram.types import ReactionCount
 
-class MyReactionCountHandler(ReactionCount):
-    """"""
-    
+class MyReactionCountHandler(ReactionCount):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

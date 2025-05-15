@@ -18,9 +18,7 @@ Telegram Bot API MenuButtonDefault type
 from typing import List, Callable
 from surfgram.types import MenuButtonDefault
 
-class MyMenuButtonDefaultHandler(MenuButtonDefault):
-    """"""
-    
+class MyMenuButtonDefaultHandler(MenuButtonDefault):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

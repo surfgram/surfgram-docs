@@ -18,9 +18,7 @@ Telegram Bot API PaidMessagePriceChanged type
 from typing import List, Callable
 from surfgram.types import PaidMessagePriceChanged
 
-class MyPaidMessagePriceChangedHandler(PaidMessagePriceChanged):
-    """"""
-    
+class MyPaidMessagePriceChangedHandler(PaidMessagePriceChanged):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

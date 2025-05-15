@@ -18,9 +18,7 @@ Telegram Bot API ChatAdministratorRights type
 from typing import List, Callable
 from surfgram.types import ChatAdministratorRights
 
-class MyChatAdministratorRightsHandler(ChatAdministratorRights):
-    """"""
-    
+class MyChatAdministratorRightsHandler(ChatAdministratorRights):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

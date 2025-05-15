@@ -18,9 +18,7 @@ Telegram Bot API InlineKeyboardButton type
 from typing import List, Callable
 from surfgram.types import InlineKeyboardButton
 
-class MyInlineKeyboardButtonHandler(InlineKeyboardButton):
-    """"""
-    
+class MyInlineKeyboardButtonHandler(InlineKeyboardButton):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

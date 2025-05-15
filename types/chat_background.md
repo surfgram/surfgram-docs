@@ -18,9 +18,7 @@ Telegram Bot API ChatBackground type
 from typing import List, Callable
 from surfgram.types import ChatBackground
 
-class MyChatBackgroundHandler(ChatBackground):
-    """"""
-    
+class MyChatBackgroundHandler(ChatBackground):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

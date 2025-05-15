@@ -18,9 +18,7 @@ Telegram Bot API BotCommandScopeDefault type
 from typing import List, Callable
 from surfgram.types import BotCommandScopeDefault
 
-class MyBotCommandScopeDefaultHandler(BotCommandScopeDefault):
-    """"""
-    
+class MyBotCommandScopeDefaultHandler(BotCommandScopeDefault):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

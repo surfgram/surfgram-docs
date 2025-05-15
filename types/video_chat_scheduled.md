@@ -18,9 +18,7 @@ Telegram Bot API VideoChatScheduled type
 from typing import List, Callable
 from surfgram.types import VideoChatScheduled
 
-class MyVideoChatScheduledHandler(VideoChatScheduled):
-    """"""
-    
+class MyVideoChatScheduledHandler(VideoChatScheduled):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

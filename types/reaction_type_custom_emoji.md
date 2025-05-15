@@ -18,9 +18,7 @@ Telegram Bot API ReactionTypeCustomEmoji type
 from typing import List, Callable
 from surfgram.types import ReactionTypeCustomEmoji
 
-class MyReactionTypeCustomEmojiHandler(ReactionTypeCustomEmoji):
-    """"""
-    
+class MyReactionTypeCustomEmojiHandler(ReactionTypeCustomEmoji):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

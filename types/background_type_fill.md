@@ -18,9 +18,7 @@ Telegram Bot API BackgroundTypeFill type
 from typing import List, Callable
 from surfgram.types import BackgroundTypeFill
 
-class MyBackgroundTypeFillHandler(BackgroundTypeFill):
-    """"""
-    
+class MyBackgroundTypeFillHandler(BackgroundTypeFill):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

@@ -18,9 +18,7 @@ Telegram Bot API LoginUrl type
 from typing import List, Callable
 from surfgram.types import LoginUrl
 
-class MyLoginUrlHandler(LoginUrl):
-    """"""
-    
+class MyLoginUrlHandler(LoginUrl):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

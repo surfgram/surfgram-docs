@@ -18,9 +18,7 @@ Telegram Bot API MenuButtonWebApp type
 from typing import List, Callable
 from surfgram.types import MenuButtonWebApp
 
-class MyMenuButtonWebAppHandler(MenuButtonWebApp):
-    """"""
-    
+class MyMenuButtonWebAppHandler(MenuButtonWebApp):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

@@ -18,9 +18,7 @@ Telegram Bot API InaccessibleMessage type
 from typing import List, Callable
 from surfgram.types import InaccessibleMessage
 
-class MyInaccessibleMessageHandler(InaccessibleMessage):
-    """"""
-    
+class MyInaccessibleMessageHandler(InaccessibleMessage):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

@@ -18,9 +18,7 @@ Telegram Bot API InputStoryContentPhoto type
 from typing import List, Callable
 from surfgram.types import InputStoryContentPhoto
 
-class MyInputStoryContentPhotoHandler(InputStoryContentPhoto):
-    """"""
-    
+class MyInputStoryContentPhotoHandler(InputStoryContentPhoto):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

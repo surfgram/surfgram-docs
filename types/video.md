@@ -18,9 +18,7 @@ Telegram Bot API Video type
 from typing import List, Callable
 from surfgram.types import Video
 
-class MyVideoHandler(Video):
-    """"""
-    
+class MyVideoHandler(Video):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

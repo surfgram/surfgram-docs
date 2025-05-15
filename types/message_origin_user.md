@@ -18,9 +18,7 @@ Telegram Bot API MessageOriginUser type
 from typing import List, Callable
 from surfgram.types import MessageOriginUser
 
-class MyMessageOriginUserHandler(MessageOriginUser):
-    """"""
-    
+class MyMessageOriginUserHandler(MessageOriginUser):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

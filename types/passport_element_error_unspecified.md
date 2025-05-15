@@ -18,9 +18,7 @@ Telegram Bot API PassportElementErrorUnspecified type
 from typing import List, Callable
 from surfgram.types import PassportElementErrorUnspecified
 
-class MyPassportElementErrorUnspecifiedHandler(PassportElementErrorUnspecified):
-    """"""
-    
+class MyPassportElementErrorUnspecifiedHandler(PassportElementErrorUnspecified):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

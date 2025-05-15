@@ -18,9 +18,7 @@ Telegram Bot API InputContactMessageContent type
 from typing import List, Callable
 from surfgram.types import InputContactMessageContent
 
-class MyInputContactMessageContentHandler(InputContactMessageContent):
-    """"""
-    
+class MyInputContactMessageContentHandler(InputContactMessageContent):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

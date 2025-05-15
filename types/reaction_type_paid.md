@@ -18,9 +18,7 @@ Telegram Bot API ReactionTypePaid type
 from typing import List, Callable
 from surfgram.types import ReactionTypePaid
 
-class MyReactionTypePaidHandler(ReactionTypePaid):
-    """"""
-    
+class MyReactionTypePaidHandler(ReactionTypePaid):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

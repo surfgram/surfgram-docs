@@ -18,9 +18,7 @@ Telegram Bot API InlineQueryResultCachedPhoto type
 from typing import List, Callable
 from surfgram.types import InlineQueryResultCachedPhoto
 
-class MyInlineQueryResultCachedPhotoHandler(InlineQueryResultCachedPhoto):
-    """"""
-    
+class MyInlineQueryResultCachedPhotoHandler(InlineQueryResultCachedPhoto):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

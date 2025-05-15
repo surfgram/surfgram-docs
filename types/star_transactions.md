@@ -18,9 +18,7 @@ Telegram Bot API StarTransactions type
 from typing import List, Callable
 from surfgram.types import StarTransactions
 
-class MyStarTransactionsHandler(StarTransactions):
-    """"""
-    
+class MyStarTransactionsHandler(StarTransactions):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

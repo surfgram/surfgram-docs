@@ -18,9 +18,7 @@ Telegram Bot API KeyboardButton type
 from typing import List, Callable
 from surfgram.types import KeyboardButton
 
-class MyKeyboardButtonHandler(KeyboardButton):
-    """"""
-    
+class MyKeyboardButtonHandler(KeyboardButton):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

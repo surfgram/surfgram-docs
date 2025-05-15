@@ -18,9 +18,7 @@ Telegram Bot API InputLocationMessageContent type
 from typing import List, Callable
 from surfgram.types import InputLocationMessageContent
 
-class MyInputLocationMessageContentHandler(InputLocationMessageContent):
-    """"""
-    
+class MyInputLocationMessageContentHandler(InputLocationMessageContent):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

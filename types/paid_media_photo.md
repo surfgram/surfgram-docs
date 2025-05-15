@@ -18,9 +18,7 @@ Telegram Bot API PaidMediaPhoto type
 from typing import List, Callable
 from surfgram.types import PaidMediaPhoto
 
-class MyPaidMediaPhotoHandler(PaidMediaPhoto):
-    """"""
-    
+class MyPaidMediaPhotoHandler(PaidMediaPhoto):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

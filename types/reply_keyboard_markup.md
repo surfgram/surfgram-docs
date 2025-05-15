@@ -18,9 +18,7 @@ Telegram Bot API ReplyKeyboardMarkup type
 from typing import List, Callable
 from surfgram.types import ReplyKeyboardMarkup
 
-class MyReplyKeyboardMarkupHandler(ReplyKeyboardMarkup):
-    """"""
-    
+class MyReplyKeyboardMarkupHandler(ReplyKeyboardMarkup):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

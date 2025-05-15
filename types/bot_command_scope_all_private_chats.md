@@ -18,9 +18,7 @@ Telegram Bot API BotCommandScopeAllPrivateChats type
 from typing import List, Callable
 from surfgram.types import BotCommandScopeAllPrivateChats
 
-class MyBotCommandScopeAllPrivateChatsHandler(BotCommandScopeAllPrivateChats):
-    """"""
-    
+class MyBotCommandScopeAllPrivateChatsHandler(BotCommandScopeAllPrivateChats):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

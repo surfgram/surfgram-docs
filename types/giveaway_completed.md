@@ -18,9 +18,7 @@ Telegram Bot API GiveawayCompleted type
 from typing import List, Callable
 from surfgram.types import GiveawayCompleted
 
-class MyGiveawayCompletedHandler(GiveawayCompleted):
-    """"""
-    
+class MyGiveawayCompletedHandler(GiveawayCompleted):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

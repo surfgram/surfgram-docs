@@ -18,9 +18,7 @@ Telegram Bot API PollAnswer type
 from typing import List, Callable
 from surfgram.types import PollAnswer
 
-class MyPollAnswerHandler(PollAnswer):
-    """"""
-    
+class MyPollAnswerHandler(PollAnswer):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

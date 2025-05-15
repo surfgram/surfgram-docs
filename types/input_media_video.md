@@ -18,9 +18,7 @@ Telegram Bot API InputMediaVideo type
 from typing import List, Callable
 from surfgram.types import InputMediaVideo
 
-class MyInputMediaVideoHandler(InputMediaVideo):
-    """"""
-    
+class MyInputMediaVideoHandler(InputMediaVideo):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

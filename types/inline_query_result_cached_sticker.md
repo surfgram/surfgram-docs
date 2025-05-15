@@ -18,9 +18,7 @@ Telegram Bot API InlineQueryResultCachedSticker type
 from typing import List, Callable
 from surfgram.types import InlineQueryResultCachedSticker
 
-class MyInlineQueryResultCachedStickerHandler(InlineQueryResultCachedSticker):
-    """"""
-    
+class MyInlineQueryResultCachedStickerHandler(InlineQueryResultCachedSticker):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

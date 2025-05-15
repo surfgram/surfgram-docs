@@ -18,9 +18,7 @@ Telegram Bot API PassportElementErrorTranslationFile type
 from typing import List, Callable
 from surfgram.types import PassportElementErrorTranslationFile
 
-class MyPassportElementErrorTranslationFileHandler(PassportElementErrorTranslationFile):
-    """"""
-    
+class MyPassportElementErrorTranslationFileHandler(PassportElementErrorTranslationFile):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

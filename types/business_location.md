@@ -18,9 +18,7 @@ Telegram Bot API BusinessLocation type
 from typing import List, Callable
 from surfgram.types import BusinessLocation
 
-class MyBusinessLocationHandler(BusinessLocation):
-    """"""
-    
+class MyBusinessLocationHandler(BusinessLocation):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

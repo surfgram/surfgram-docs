@@ -18,9 +18,7 @@ Telegram Bot API InputMediaPhoto type
 from typing import List, Callable
 from surfgram.types import InputMediaPhoto
 
-class MyInputMediaPhotoHandler(InputMediaPhoto):
-    """"""
-    
+class MyInputMediaPhotoHandler(InputMediaPhoto):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

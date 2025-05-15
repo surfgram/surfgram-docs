@@ -18,9 +18,7 @@ Telegram Bot API ChatMemberBanned type
 from typing import List, Callable
 from surfgram.types import ChatMemberBanned
 
-class MyChatMemberBannedHandler(ChatMemberBanned):
-    """"""
-    
+class MyChatMemberBannedHandler(ChatMemberBanned):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

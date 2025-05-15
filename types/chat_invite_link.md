@@ -18,9 +18,7 @@ Telegram Bot API ChatInviteLink type
 from typing import List, Callable
 from surfgram.types import ChatInviteLink
 
-class MyChatInviteLinkHandler(ChatInviteLink):
-    """"""
-    
+class MyChatInviteLinkHandler(ChatInviteLink):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

@@ -18,9 +18,7 @@ Telegram Bot API Story type
 from typing import List, Callable
 from surfgram.types import Story
 
-class MyStoryHandler(Story):
-    """"""
-    
+class MyStoryHandler(Story):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

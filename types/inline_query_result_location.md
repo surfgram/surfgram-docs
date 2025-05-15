@@ -18,9 +18,7 @@ Telegram Bot API InlineQueryResultLocation type
 from typing import List, Callable
 from surfgram.types import InlineQueryResultLocation
 
-class MyInlineQueryResultLocationHandler(InlineQueryResultLocation):
-    """"""
-    
+class MyInlineQueryResultLocationHandler(InlineQueryResultLocation):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

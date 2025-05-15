@@ -18,9 +18,7 @@ Telegram Bot API PassportFile type
 from typing import List, Callable
 from surfgram.types import PassportFile
 
-class MyPassportFileHandler(PassportFile):
-    """"""
-    
+class MyPassportFileHandler(PassportFile):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

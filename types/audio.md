@@ -18,9 +18,7 @@ Telegram Bot API Audio type
 from typing import List, Callable
 from surfgram.types import Audio
 
-class MyAudioHandler(Audio):
-    """"""
-    
+class MyAudioHandler(Audio):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

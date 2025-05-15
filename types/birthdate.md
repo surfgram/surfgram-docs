@@ -18,9 +18,7 @@ Telegram Bot API Birthdate type
 from typing import List, Callable
 from surfgram.types import Birthdate
 
-class MyBirthdateHandler(Birthdate):
-    """"""
-    
+class MyBirthdateHandler(Birthdate):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

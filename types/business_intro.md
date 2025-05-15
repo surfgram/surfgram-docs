@@ -18,9 +18,7 @@ Telegram Bot API BusinessIntro type
 from typing import List, Callable
 from surfgram.types import BusinessIntro
 
-class MyBusinessIntroHandler(BusinessIntro):
-    """"""
-    
+class MyBusinessIntroHandler(BusinessIntro):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

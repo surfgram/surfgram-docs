@@ -18,9 +18,7 @@ Telegram Bot API ChatMemberLeft type
 from typing import List, Callable
 from surfgram.types import ChatMemberLeft
 
-class MyChatMemberLeftHandler(ChatMemberLeft):
-    """"""
-    
+class MyChatMemberLeftHandler(ChatMemberLeft):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

@@ -18,9 +18,7 @@ Telegram Bot API BotName type
 from typing import List, Callable
 from surfgram.types import BotName
 
-class MyBotNameHandler(BotName):
-    """"""
-    
+class MyBotNameHandler(BotName):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

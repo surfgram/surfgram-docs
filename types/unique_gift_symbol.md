@@ -18,9 +18,7 @@ Telegram Bot API UniqueGiftSymbol type
 from typing import List, Callable
 from surfgram.types import UniqueGiftSymbol
 
-class MyUniqueGiftSymbolHandler(UniqueGiftSymbol):
-    """"""
-    
+class MyUniqueGiftSymbolHandler(UniqueGiftSymbol):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

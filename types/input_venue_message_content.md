@@ -18,9 +18,7 @@ Telegram Bot API InputVenueMessageContent type
 from typing import List, Callable
 from surfgram.types import InputVenueMessageContent
 
-class MyInputVenueMessageContentHandler(InputVenueMessageContent):
-    """"""
-    
+class MyInputVenueMessageContentHandler(InputVenueMessageContent):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

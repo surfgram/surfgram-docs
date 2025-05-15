@@ -18,9 +18,7 @@ Telegram Bot API StarAmount type
 from typing import List, Callable
 from surfgram.types import StarAmount
 
-class MyStarAmountHandler(StarAmount):
-    """"""
-    
+class MyStarAmountHandler(StarAmount):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

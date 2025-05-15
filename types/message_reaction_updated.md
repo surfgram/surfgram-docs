@@ -18,9 +18,7 @@ Telegram Bot API MessageReactionUpdated type
 from typing import List, Callable
 from surfgram.types import MessageReactionUpdated
 
-class MyMessageReactionUpdatedHandler(MessageReactionUpdated):
-    """"""
-    
+class MyMessageReactionUpdatedHandler(MessageReactionUpdated):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

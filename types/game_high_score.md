@@ -18,9 +18,7 @@ Telegram Bot API GameHighScore type
 from typing import List, Callable
 from surfgram.types import GameHighScore
 
-class MyGameHighScoreHandler(GameHighScore):
-    """"""
-    
+class MyGameHighScoreHandler(GameHighScore):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

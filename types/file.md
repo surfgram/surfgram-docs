@@ -18,9 +18,7 @@ Telegram Bot API File type
 from typing import List, Callable
 from surfgram.types import File
 
-class MyFileHandler(File):
-    """"""
-    
+class MyFileHandler(File):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

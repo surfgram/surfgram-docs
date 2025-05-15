@@ -18,9 +18,7 @@ Telegram Bot API StoryArea type
 from typing import List, Callable
 from surfgram.types import StoryArea
 
-class MyStoryAreaHandler(StoryArea):
-    """"""
-    
+class MyStoryAreaHandler(StoryArea):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

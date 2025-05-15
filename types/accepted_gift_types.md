@@ -18,9 +18,7 @@ Telegram Bot API AcceptedGiftTypes type
 from typing import List, Callable
 from surfgram.types import AcceptedGiftTypes
 
-class MyAcceptedGiftTypesHandler(AcceptedGiftTypes):
-    """"""
-    
+class MyAcceptedGiftTypesHandler(AcceptedGiftTypes):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

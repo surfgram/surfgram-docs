@@ -18,9 +18,7 @@ Telegram Bot API InlineQueryResultGif type
 from typing import List, Callable
 from surfgram.types import InlineQueryResultGif
 
-class MyInlineQueryResultGifHandler(InlineQueryResultGif):
-    """"""
-    
+class MyInlineQueryResultGifHandler(InlineQueryResultGif):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

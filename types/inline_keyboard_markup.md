@@ -18,9 +18,7 @@ Telegram Bot API InlineKeyboardMarkup type
 from typing import List, Callable
 from surfgram.types import InlineKeyboardMarkup
 
-class MyInlineKeyboardMarkupHandler(InlineKeyboardMarkup):
-    """"""
-    
+class MyInlineKeyboardMarkupHandler(InlineKeyboardMarkup):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

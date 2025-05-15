@@ -18,9 +18,7 @@ Telegram Bot API KeyboardButtonPollType type
 from typing import List, Callable
 from surfgram.types import KeyboardButtonPollType
 
-class MyKeyboardButtonPollTypeHandler(KeyboardButtonPollType):
-    """"""
-    
+class MyKeyboardButtonPollTypeHandler(KeyboardButtonPollType):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

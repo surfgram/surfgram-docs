@@ -18,9 +18,7 @@ Telegram Bot API MessageOriginChannel type
 from typing import List, Callable
 from surfgram.types import MessageOriginChannel
 
-class MyMessageOriginChannelHandler(MessageOriginChannel):
-    """"""
-    
+class MyMessageOriginChannelHandler(MessageOriginChannel):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

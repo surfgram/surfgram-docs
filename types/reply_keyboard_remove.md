@@ -18,9 +18,7 @@ Telegram Bot API ReplyKeyboardRemove type
 from typing import List, Callable
 from surfgram.types import ReplyKeyboardRemove
 
-class MyReplyKeyboardRemoveHandler(ReplyKeyboardRemove):
-    """"""
-    
+class MyReplyKeyboardRemoveHandler(ReplyKeyboardRemove):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

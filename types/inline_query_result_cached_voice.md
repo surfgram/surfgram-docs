@@ -18,9 +18,7 @@ Telegram Bot API InlineQueryResultCachedVoice type
 from typing import List, Callable
 from surfgram.types import InlineQueryResultCachedVoice
 
-class MyInlineQueryResultCachedVoiceHandler(InlineQueryResultCachedVoice):
-    """"""
-    
+class MyInlineQueryResultCachedVoiceHandler(InlineQueryResultCachedVoice):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

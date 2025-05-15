@@ -18,9 +18,7 @@ Telegram Bot API InputMediaAudio type
 from typing import List, Callable
 from surfgram.types import InputMediaAudio
 
-class MyInputMediaAudioHandler(InputMediaAudio):
-    """"""
-    
+class MyInputMediaAudioHandler(InputMediaAudio):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

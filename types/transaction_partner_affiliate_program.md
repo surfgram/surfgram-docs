@@ -18,9 +18,7 @@ Telegram Bot API TransactionPartnerAffiliateProgram type
 from typing import List, Callable
 from surfgram.types import TransactionPartnerAffiliateProgram
 
-class MyTransactionPartnerAffiliateProgramHandler(TransactionPartnerAffiliateProgram):
-    """"""
-    
+class MyTransactionPartnerAffiliateProgramHandler(TransactionPartnerAffiliateProgram):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

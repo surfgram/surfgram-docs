@@ -18,9 +18,7 @@ Telegram Bot API BackgroundTypePattern type
 from typing import List, Callable
 from surfgram.types import BackgroundTypePattern
 
-class MyBackgroundTypePatternHandler(BackgroundTypePattern):
-    """"""
-    
+class MyBackgroundTypePatternHandler(BackgroundTypePattern):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

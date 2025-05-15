@@ -18,9 +18,7 @@ Telegram Bot API WriteAccessAllowed type
 from typing import List, Callable
 from surfgram.types import WriteAccessAllowed
 
-class MyWriteAccessAllowedHandler(WriteAccessAllowed):
-    """"""
-    
+class MyWriteAccessAllowedHandler(WriteAccessAllowed):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

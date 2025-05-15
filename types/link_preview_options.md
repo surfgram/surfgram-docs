@@ -18,9 +18,7 @@ Telegram Bot API LinkPreviewOptions type
 from typing import List, Callable
 from surfgram.types import LinkPreviewOptions
 
-class MyLinkPreviewOptionsHandler(LinkPreviewOptions):
-    """"""
-    
+class MyLinkPreviewOptionsHandler(LinkPreviewOptions):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

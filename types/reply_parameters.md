@@ -18,9 +18,7 @@ Telegram Bot API ReplyParameters type
 from typing import List, Callable
 from surfgram.types import ReplyParameters
 
-class MyReplyParametersHandler(ReplyParameters):
-    """"""
-    
+class MyReplyParametersHandler(ReplyParameters):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

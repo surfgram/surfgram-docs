@@ -18,9 +18,7 @@ Telegram Bot API RevenueWithdrawalStateFailed type
 from typing import List, Callable
 from surfgram.types import RevenueWithdrawalStateFailed
 
-class MyRevenueWithdrawalStateFailedHandler(RevenueWithdrawalStateFailed):
-    """"""
-    
+class MyRevenueWithdrawalStateFailedHandler(RevenueWithdrawalStateFailed):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

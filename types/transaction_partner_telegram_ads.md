@@ -18,9 +18,7 @@ Telegram Bot API TransactionPartnerTelegramAds type
 from typing import List, Callable
 from surfgram.types import TransactionPartnerTelegramAds
 
-class MyTransactionPartnerTelegramAdsHandler(TransactionPartnerTelegramAds):
-    """"""
-    
+class MyTransactionPartnerTelegramAdsHandler(TransactionPartnerTelegramAds):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

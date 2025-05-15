@@ -18,9 +18,7 @@ Telegram Bot API InputSticker type
 from typing import List, Callable
 from surfgram.types import InputSticker
 
-class MyInputStickerHandler(InputSticker):
-    """"""
-    
+class MyInputStickerHandler(InputSticker):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

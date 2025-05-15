@@ -18,9 +18,7 @@ Telegram Bot API PassportElementErrorReverseSide type
 from typing import List, Callable
 from surfgram.types import PassportElementErrorReverseSide
 
-class MyPassportElementErrorReverseSideHandler(PassportElementErrorReverseSide):
-    """"""
-    
+class MyPassportElementErrorReverseSideHandler(PassportElementErrorReverseSide):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

@@ -18,9 +18,7 @@ Telegram Bot API InputProfilePhotoAnimated type
 from typing import List, Callable
 from surfgram.types import InputProfilePhotoAnimated
 
-class MyInputProfilePhotoAnimatedHandler(InputProfilePhotoAnimated):
-    """"""
-    
+class MyInputProfilePhotoAnimatedHandler(InputProfilePhotoAnimated):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

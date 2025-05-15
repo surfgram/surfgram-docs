@@ -18,9 +18,7 @@ Telegram Bot API BusinessOpeningHours type
 from typing import List, Callable
 from surfgram.types import BusinessOpeningHours
 
-class MyBusinessOpeningHoursHandler(BusinessOpeningHours):
-    """"""
-    
+class MyBusinessOpeningHoursHandler(BusinessOpeningHours):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

@@ -18,9 +18,7 @@ Telegram Bot API InlineQueryResultGame type
 from typing import List, Callable
 from surfgram.types import InlineQueryResultGame
 
-class MyInlineQueryResultGameHandler(InlineQueryResultGame):
-    """"""
-    
+class MyInlineQueryResultGameHandler(InlineQueryResultGame):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

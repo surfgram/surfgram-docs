@@ -18,9 +18,7 @@ Telegram Bot API BotCommandScopeAllGroupChats type
 from typing import List, Callable
 from surfgram.types import BotCommandScopeAllGroupChats
 
-class MyBotCommandScopeAllGroupChatsHandler(BotCommandScopeAllGroupChats):
-    """"""
-    
+class MyBotCommandScopeAllGroupChatsHandler(BotCommandScopeAllGroupChats):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

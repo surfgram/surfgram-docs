@@ -18,9 +18,7 @@ Telegram Bot API ProximityAlertTriggered type
 from typing import List, Callable
 from surfgram.types import ProximityAlertTriggered
 
-class MyProximityAlertTriggeredHandler(ProximityAlertTriggered):
-    """"""
-    
+class MyProximityAlertTriggeredHandler(ProximityAlertTriggered):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

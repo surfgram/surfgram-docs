@@ -18,9 +18,7 @@ Telegram Bot API InlineQueryResultCachedVideo type
 from typing import List, Callable
 from surfgram.types import InlineQueryResultCachedVideo
 
-class MyInlineQueryResultCachedVideoHandler(InlineQueryResultCachedVideo):
-    """"""
-    
+class MyInlineQueryResultCachedVideoHandler(InlineQueryResultCachedVideo):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

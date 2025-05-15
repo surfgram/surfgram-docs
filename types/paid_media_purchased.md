@@ -18,9 +18,7 @@ Telegram Bot API PaidMediaPurchased type
 from typing import List, Callable
 from surfgram.types import PaidMediaPurchased
 
-class MyPaidMediaPurchasedHandler(PaidMediaPurchased):
-    """"""
-    
+class MyPaidMediaPurchasedHandler(PaidMediaPurchased):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

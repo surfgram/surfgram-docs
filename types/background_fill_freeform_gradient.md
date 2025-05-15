@@ -18,9 +18,7 @@ Telegram Bot API BackgroundFillFreeformGradient type
 from typing import List, Callable
 from surfgram.types import BackgroundFillFreeformGradient
 
-class MyBackgroundFillFreeformGradientHandler(BackgroundFillFreeformGradient):
-    """"""
-    
+class MyBackgroundFillFreeformGradientHandler(BackgroundFillFreeformGradient):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

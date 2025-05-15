@@ -18,9 +18,7 @@ Telegram Bot API StoryAreaTypeWeather type
 from typing import List, Callable
 from surfgram.types import StoryAreaTypeWeather
 
-class MyStoryAreaTypeWeatherHandler(StoryAreaTypeWeather):
-    """"""
-    
+class MyStoryAreaTypeWeatherHandler(StoryAreaTypeWeather):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable

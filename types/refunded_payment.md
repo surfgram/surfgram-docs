@@ -18,9 +18,7 @@ Telegram Bot API RefundedPayment type
 from typing import List, Callable
 from surfgram.types import RefundedPayment
 
-class MyRefundedPaymentHandler(RefundedPayment):
-    """"""
-    
+class MyRefundedPaymentHandler(RefundedPayment):    
     @property
     def __is_active__(self) -> bool:
         return True  # Set False to disable
