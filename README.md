@@ -23,7 +23,6 @@
 - [State](fsm/state.md)
 - [States](fsm/states.md)
 
-## Helpers
 # FSM
 - [State](fsm/state.md)
 - [States](fsm/states.md)
